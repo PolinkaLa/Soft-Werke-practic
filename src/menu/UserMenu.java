@@ -17,6 +17,8 @@ import history.AllHistory;
 /**
  * @author LappoPolina
  * 
+ * Содержит функции для добавления новой записи о клиенте/устройстве/продаже
+ * Реализована возможность вывода данных н экран
  */
 public class UserMenu {
 	
@@ -25,6 +27,10 @@ public class UserMenu {
 	
 	private static Validation valid = new Validation();
 	
+	/**
+	 * функция для добавления новой записи о клиенте
+	 * @param historyOfAllNotes передаются списки кликтов, устройств, продаж
+	 */
 	public static void createClient(AllHistory historyOfAllNotes){
 		System.out.println("Enter Last Name, First Name, Middle Name and date "
 				+ "of Birthday in format dd.mm.yyyy:");
@@ -37,6 +43,10 @@ public class UserMenu {
 		System.out.println("Client create successfully.");
 	}
 	
+	/**
+	 * функция для добавления новой записи об устройстве
+	 * @param historyOfAllNotes передаются списки кликтов, устройств, продаж
+	 */
 	public static void createDevice(AllHistory historyOfAllNotes){
 		System.out.println("Enter Code of Mark, Code of Type, Model, Code of Color,"
 				+ " Cost and Date of Produce in format dd.mm.yyyy:");
@@ -65,6 +75,10 @@ public class UserMenu {
 		System.out.println("Device create successfully.");
 	}
 	
+	/**
+	 * функция для добавления новой записи о продаже
+	 * @param historyOfAllNotes передаются списки кликтов, устройств, продаж
+	 */
 	public static void createSale(AllHistory historyOfAllNotes){
 		System.out.println("Enter Date in format dd.mm.yyyy, IdClient and Numder of purchased device:");
 		String dateSale = in.next();
@@ -80,20 +94,32 @@ public class UserMenu {
 			count = in.nextInt();
 			checkSale.put(historyOfAllNotes.getDevices().get(idDevice-1), count); 
 		 }
-		historyOfAllNotes.setSales(new Sale(valid.getDate(), historyOfAllNotes.getClients().get(idClient-1), checkSale) ); // заполнить юзерами по их айди
+		historyOfAllNotes.setSales(new Sale(valid.getDate(), historyOfAllNotes.getClients().get(idClient-1), checkSale) ); 
 		System.out.println("Sale create successfully.");
 	}
 	
+	/**
+	 * функция для вывода на экран списка клиентов
+	 * @param historyOfAllNotes передаются списки клиентов, устройств, продаж
+	 */
 	public static void showListClient(AllHistory historyOfAllNotes){
 		for (int i = 0; i < historyOfAllNotes.getClients().size(); i++)
 			System.out.println(historyOfAllNotes.getClients().get(i).toString());
 	}
 	
+	/**
+	 * функция для вывода на экран списка устройст
+	 * @param historyOfAllNotes передаются списки клиентов, устройств, продаж
+	 */
 	public static void showListDevice(AllHistory historyOfAllNotes){
 		for (int i = 0; i < historyOfAllNotes.getDevices().size(); i++)
 			System.out.println(historyOfAllNotes.getDevices().get(i).toString());
 	}
 	
+	/**
+	 * Функция для вывода на экран списка списка продаж
+	 * @param historyOfAllNotes передаются списки клиентов, устройств, продаж
+	 */
 	public static void showListSale(AllHistory historyOfAllNotes){
 		for (int i = 0; i < historyOfAllNotes.getSales().size(); i++)
 			System.out.println(historyOfAllNotes.getSales().get(i).toString());

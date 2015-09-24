@@ -7,7 +7,8 @@ import history.AllHistory;
 
 /**
  * @author LappoPolina
- * 
+ * Класс предоставляет программе общение с пользователем через консоль
+ * Содержит точку входа
  */
 public class Main {
 
@@ -15,6 +16,7 @@ public class Main {
 				
 		Scanner in = new Scanner(System.in);
 		AllHistory historyOfAllNotes = new AllHistory();
+		
 		//приветствие
 		System.out.println("Hi! You can create new Client, new Device, new Sale!");
 		System.out.println("So you can sort and search lists");
@@ -31,11 +33,6 @@ public class Main {
 		System.out.println("	showListSale - show list of sales");
 		System.out.println("	exit - end of work");
 		
-		//создание списков клиентов, устройств, продаж
-		
-		
-		//обработка команд
-		//String operation;
 		while (true) {
 			System.out.println("Enter comad:");
 			

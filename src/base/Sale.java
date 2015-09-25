@@ -31,60 +31,30 @@ public class Sale {
 		this.checkOfSale = checkOfSale;
 	}
 
-	/**
-	 * —войство дл€ получени€ значени€ Id продажи
-	 * @return int 
-	 */
+
 	public int getIdSale() {
 		return idSale;
 	}
-	/**
-	 * —войство дл€ получени€ значени€ даты продажи
-	 * @return Date
-	 */
 	public Date getDateOfSale() {
 		return (Date) dateOfSale.clone();
 	}
-	/**
-	 * —войство дл€ получени€ значени€ данных о клиенте, совершившим покупку
-	 * @return Client
-	 */
 	public Client getClient() {
 		return client;
 	}
-	/**
-	 * —войство дл€ получени€ значени€ сведений о купленных устройсваи и их количестве
-	 * @return Map
-	 */
 	public  Map<Device, Integer> getCheckOfSle() {
 		return checkOfSale;
 	}
 	
-	/**
-	 * 	—войство дл€ задани€ значени€ Id продажи
-	 * @param idSale уникальный номер продажи
-	 */
+
 	public final void setIdSale(int idSale) {
 		this.idSale = idSale;
 	}
-	/**
-	 * —войство дл€ задани€ значени€ даты продажи
-	 * @param dateOfSale дата продажи
-	 */
 	public final void setDateOfSale(Date dateOfSale) {
 		this.dateOfSale = dateOfSale;
 	}
-	/**
-	 * —войство дл€ задани€ значени€ клиента, совершившего покупку
-	 * @param client ƒанные о клиенте
-	 */
 	public final void setClient(Client client) {
 		this.client = client;
 	}
-	/**
-	 * —войство дл€ задани€ значений купленных устройств и их количество
-	 * @param checkOfSale купленные устройства и их количество
-	 */
 	public final void setCheckOfSale (Map<Device, Integer> checkOfSale) {
 		this.checkOfSale = checkOfSale;
 	}

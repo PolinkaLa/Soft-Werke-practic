@@ -44,102 +44,47 @@ public class Device {
 		idDevice = nextUniquelD++;
 	}
 
-	/**
-	 * Свойстов для получения ID устройства
-	 * @return int 
-	 */
 	public int getIdDevice() {
         return idDevice;
     }
-	/**
-	 * Свойство для получения марки устройства
-	 * @return Mark
-	 */
 	public Mark getMark() {
 		return mark;
 	}
-	/**
-	 * Свойство для получения модели
-	 * @return String
-	 */
 	public String getModel() {
 		return model;
 	}
-	/**
-	 * Свойство для получение типа устройсва
-	 * @return Type
-	 */
 	public Type getType() {
 		return type;
 	}
-	/**
-	 * Свойство для получения цвета
-	 * @return Color
-	 */
 	public Color getColor() {
 		return color;
 	}
-	/**
-	 * Свойство для получения стоимости
-	 * @return double
-	 */
 	public double getCost() {
 		return cost;
 	}
-	/**
-	 * свойство для получения даты производства
-	 * @return Date
-	 */
 	public Date getDateOfProduce() {
 		return (Date) dateOfProduce.clone();
 	}
 
-	/**
-	 * Свойство для задания значения ID устройства 
-	 * @param idDevice уникальный номер устройства
-	 */
+
 	public final void setIdDevice(int idDevice) {
 		this.idDevice = idDevice;
 	}
-	/**
-	 * Свойство для задания значения марки устройства
-	 * @param mark марка устройсва
-	 */
 	public final void setMark(Mark mark) {
 		this.mark = mark;
 	}
-	/**
-	 * Свойство для задания значения модели устройсва
-	 * @param model модель устройсва
-	 */
 	public final void setModel(String model) {
 		this.model = model;
 	}
-	/**
-	 * Свойство для задания значения типа устройсва
-	 * @param type тип устройсва
-	 */
 	public final void setType(Type type) {
 		this.type = type;
 	}
-	/**
-	 * Свойство для задания цвета устройства
-	 * @param color цвет устройста
-	 */
 	public final void setColor(Color color) {
 		this.color = color;
 	}
-	/**
-	 * Свойство для задания стоимости устройства
-	 * @param cost стоимость устройства
-	 */
 	public final void setCost(double cost) {
 		this.cost = cost;
 	}
-	/**
-	 * Свойство для задания даты производста
-	 * @param dateOfProduce дата производства
-	 */
 	public final void setDateOfProduce(Date dateOfProduce) {
 		this.dateOfProduce = dateOfProduce;
 	}

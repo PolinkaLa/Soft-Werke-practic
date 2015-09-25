@@ -38,84 +38,36 @@ public class Client {
 		idClient = nextUniquelD++;
 	}
 	
-	/**
-	 * Свойство для получения Id клиета
-	 * @return idClient 
-	 */
+	
 	public int getIdClient() {
         return idClient;
     }
-	
-	/**
-	 * Свойство для получения Фамилии
-	 * @return lastName 
-	 */
 	public String getLastName() {
         return lastName;
     }
-	
-	/**
-	 * Свойство для получения Имени
-	 * @return firstName 
-	 */
-	
 	public String getFirstName() {
         return firstName;
     }
-	
-	/**
-	 * Свойство для получения Отчество
-	 * @return middleName 
-	 */
 	public String getMiddleName() {
         return middleName;
     }
-	
-	/**
-	 * Свойство для получения Даты рождения
-	 * @return dateOfBirth 
-	 */
 	public Date getDateOfBirth(){
 		return (Date) dateOfBirth.clone();	  
 	}
 	
 	
-	/**
-	 * Свойство для задания Id клиента
-	 * @param idClient уникальный номер клинта 
-	 */
 	public final void setIdClient(int idClient){ 
         this.idClient = idClient; 
 	}
-	
-	/**
-	 * Свойство для задания Фамилии клиента
-	 * @param lastName фамилия 
-	 */
 	public final void setLastName(String lastName){ 
         this.lastName = lastName; 
 	}
-	
-	/**
-	 * Свойство для задания Имени клиента
-	 * @param firstName имя
-	 */
 	public final void setFirstName(String firstName){ 
         this.firstName = firstName; 
 	}
-	
-	/**
-	 * Свойство для задания Отчества клиента
-	 * @param middleName отчество 
-	 */
 	public final void setMiddleName(String middleName){ 
         this.middleName = middleName; 
 	}
-	
-	/**
-	 * Свойство для задания Даты рождения
-	 * @param  dateOfBirth дата рождения
-	 */
 	public final void setDateOfBirth(Date dateOfBirth){ 
         this.dateOfBirth = dateOfBirth; 
 	}

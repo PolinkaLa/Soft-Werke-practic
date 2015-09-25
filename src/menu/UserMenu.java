@@ -38,9 +38,13 @@ public class UserMenu {
 		String first = in.next();
 		String middle = in.next();
 		String dateBirth =in.next();
-		valid.parsDate(dateBirth);
-		historyOfAllNotes.setClients(new Client(last, first, middle, valid.getDate()));
-		System.out.println("Client create successfully.");
+		if (valid.isValidFirstName(first) & valid.isValidLastName(last) & valid.isValidMiddleName(middle)
+				& valid.isValidDate(dateBirth) ) {
+			historyOfAllNotes.setClients(new Client(last, first, middle, valid.getDate()));
+			System.out.println("Client create successfully.");
+		} 
+		else 
+			System.out.println("ERROR! Сannot create a record from Client, verify the accuracy of information entry");
 	}
 	
 	/**
@@ -53,26 +57,30 @@ public class UserMenu {
 		
 		System.out.println("Code of Mark:");
 		for (int i = 0; i < Mark.values().length; i++)
-			System.out.println("	" + i + " - " + Mark.values()[i]);
+			System.out.println("	" + i + " - " + Mark.values()[i]); // вывод кодов марок
 		
 		System.out.println("Code of Type:");
 		for (int i = 0; i < Type.values().length; i++)
-			System.out.println("	" + i + " - " + Type.values()[i]);
+			System.out.println("	" + i + " - " + Type.values()[i]); // вывод кодов типов
 		
 		System.out.println("Code of Color:");
 		for (int i = 0; i < Color.values().length; i++)
-			System.out.println("	" + i + " - " + Color.values()[i]);
+			System.out.println("	" + i + " - " + Color.values()[i]); // вывод кодов цветов
 		
-		int mark = in.nextInt();
-		int type = in.nextInt();
+		String mark = in.next();
+		String type = in.next();
 		String model = in.next();
-		int color = in.nextInt();
-		double cos = in.nextDouble();
+		String color = in.next();
+		String cos = in.next();
 		String date = in.next();
-		valid.parsDate(date);
-		historyOfAllNotes.setDevices(new Device(Mark.values()[mark], Type.values()[type], model, 
-				Color.values()[color], cos, valid.getDate()));
-		System.out.println("Device create successfully.");
+		if (valid.isValidMark(mark) & valid.isValidType(type) & valid.isValidColor(color) &
+				valid.isValidCost(cos) & valid.isValidDate(date) ) {
+			historyOfAllNotes.setDevices(new Device(Mark.values()[valid.getMark()], Type.values()[valid.getType()],
+					model, 	Color.values()[valid.getColor()], valid.getCost(), valid.getDate())); // добавление нового устройства
+			System.out.println("Device create successfully.");
+		}
+		else 
+			System.out.println("ERROR! Сannot create a record from Device, verify the accuracy of information entry");
 	}
 	
 	/**
@@ -82,20 +90,29 @@ public class UserMenu {
 	public static void createSale(AllHistory historyOfAllNotes){
 		System.out.println("Enter Date in format dd.mm.yyyy, IdClient and Numder of purchased device:");
 		String dateSale = in.next();
-		valid.parsDate(dateSale);
+		valid.isValidDate(dateSale);
 		int idClient = in.nextInt();
 		int number = in.nextInt();
 		int idDevice;
 		int count;
-		Map<Device, Integer> checkSale = new HashMap<Device, Integer>();
-		for (int i = 0; i < number; i++){
-			System.out.println("Enter IdDevice and Count:");
-			idDevice = in.nextInt();
-			count = in.nextInt();
-			checkSale.put(historyOfAllNotes.getDevices().get(idDevice-1), count); 
+		if (valid.isValidClient(idClient, historyOfAllNotes)) {  // если пользователь с таким айдишником существует, то.....
+			Map<Device, Integer> checkSale = new HashMap<Device, Integer>();
+			for (int i = 0; i < number; i++){
+				System.out.println("Enter IdDevice and Count:");
+					idDevice = in.nextInt();
+					if (valid.isValidDevice(idDevice, historyOfAllNotes)) { // если есть устройство с таким айди существует
+						count = in.nextInt();								// считываем его количество
+						checkSale.put(historyOfAllNotes.getDevices().get(idDevice-1), count); // и добавляем в чек
+					}
+					else 
+						System.out.println("ERROR! Сannot create a record from Sale, verify the accuracy of information entry");
+			}
+			historyOfAllNotes.setSales(new Sale(valid.getDate(), historyOfAllNotes.getClients().get(idClient-1), checkSale) );// новая запись о продаже
+			System.out.println("Sale create successfully.");
 		 }
-		historyOfAllNotes.setSales(new Sale(valid.getDate(), historyOfAllNotes.getClients().get(idClient-1), checkSale) ); 
-		System.out.println("Sale create successfully.");
+		else 
+			System.out.println("ERROR! Сannot create a record from Sale, verify the accuracy of information entry");
+		
 	}
 	
 	/**

@@ -17,46 +17,24 @@ public class AllHistory {
 		private ArrayList<Device> devices = new ArrayList<>();
 		private ArrayList<Sale> sales = new ArrayList<>();
 		
-		/**
-		 * —войство дл€ получени€ списка клиентов
-		 * @return  ArrayList
-		 */
+
 		public ArrayList<Client> getClients() {
 			return clients;
 		}
-		/**
-		 * —войстов дл€ получени€ списка устройст
-		 * @return  ArrayList
-		 */
 		public ArrayList<Device> getDevices() {
 			return devices;
 		}
-		/**
-		 * —войство дл€ получени€ списка продаж
-		 * @return  ArrayList
-		 */
 		public ArrayList<Sale> getSales() {
 			return sales;
 		}
 		
-		/**
-		 * —войство дл€ добавлени€ новой записи о клиенте в список
-		 * @param client данные о клиенте
-		 */
+	
 		public final void setClients(Client client) {
 			clients.add(client);
 		}
-		/**
-		 * —войство дл€ добавлени€ новой записи об устройстве в список
-		 * @param device данные об устройстве
-		 */
 		public final void setDevices(Device device) {
 			devices.add(device);
 		}
-		/**
-		 * —войство дд€ добавлени€ новой записи о продаже 
-		 * @param sale данные о продаже
-		 */
 		public final void setSales(Sale sale) {
 			sales.add(sale);
 		}

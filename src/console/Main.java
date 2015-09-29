@@ -6,66 +6,72 @@ import menu.UserMenu;
 import history.AllHistory;
 
 /**
- * @author LappoPolina
- * Класс предоставляет программе общение с пользователем через консоль
- * Содержит точку входа
+ * @author LappoPolina Класс предоставляет программе общение с пользователем
+ *         через консоль Содержит точку входа
  */
 public class Main {
 
 	public static void main(String[] args) {
-				
+
 		Scanner in = new Scanner(System.in);
 		AllHistory historyOfAllNotes = new AllHistory();
-		
-		//приветствие
-		System.out.println("Hi! You can create new Client, new Device, new Sale!");
-		System.out.println("So you can sort and search lists");
-		System.out.println("Comand:");
-		System.out.println("	createCleint -  add new Client");
-		System.out.println("	createDevice - add new Device");
-		System.out.println("	createSale - add new Sale");
-		System.out.println("	sortListClient - sorting list of Client");
-		System.out.println("	sortListDevice - sorting list of Device");
-		System.out.println("	sortListSale - sorting list of Sale");
-		System.out.println("	search - for finding information");
-		System.out.println("	showListClient - show list of clients");
-		System.out.println("	showListDevice - show list of devices");
-		System.out.println("	showListSale - show list of sales");
-		System.out.println("	exit - end of work");
-		
+
+		// приветствие
+		UserMenu.helpForUser();
+
 		while (true) {
 			System.out.println("Enter comad:");
-			
-			switch (in.next()){
-			
+
+			switch (in.next()) {
+
 			case "createClient": // добавление нового клиента
 				UserMenu.createClient(historyOfAllNotes);
 				break;
-        	case "createDevice": // добавление нового устройства
+			case "createDevice": // добавление нового устройства
 				UserMenu.createDevice(historyOfAllNotes);
 				break;
 			case "createSale": // добавление новой продажи
 				UserMenu.createSale(historyOfAllNotes);
 				break;
 			case "sortListClient": // сортировка
-				//System.out.println("On what basis will sort (Date, LastName, FirstName, MiddeleName):");
-				
-				switch (in.next()){
-					case "Date":
-						break;
-					case "LastName":
-						break;
-					case "FirsName":
-						break;
-					case "MiddleName":
-						break;
+				System.out.println("On what basis will sort (Date, LastName, FirstName, MiddeleName):");
+
+				switch (in.next()) {
+				case "Date":
+					UserMenu.compareClientDate(historyOfAllNotes);
+					break;
+				case "LastName":
+					UserMenu.compareClientLastName(historyOfAllNotes);
+					break;
+				case "FirstName":
+					UserMenu.compareClientFirstName(historyOfAllNotes);
+					break;
+				case "MiddleName":
+					UserMenu.compareClientMiddleName(historyOfAllNotes);
+					break;
 				}
 				break;
 			case "sortListDevice": // сортировка
 				break;
 			case "sortListSale": // сортировка
 				break;
-			case "search": // поиск
+			case "searchOnListClient": // поиск
+				System.out.println("On what basis will search (Date, LastName, FirstName, MiddeleName):");
+
+				switch (in.next()) {
+				case "Date":
+					UserMenu.searchClientDate(historyOfAllNotes);
+					break;
+				case "LastName":
+					UserMenu.searchClientLastName(historyOfAllNotes);
+					break;
+				case "LastFirstName":
+					UserMenu.searchClientLastFirstName(historyOfAllNotes);
+					break;
+				case "MiddleName":
+					UserMenu.compareClientMiddleName(historyOfAllNotes);
+					break;
+				}
 				break;
 			case "showListClient": // вывод списка клиентов на экран
 				UserMenu.showListClient(historyOfAllNotes);
@@ -84,7 +90,7 @@ public class Main {
 			default: // команда введена неверно
 				System.out.println("ERROR. Unknown comand. Try again");
 				break;
-			}		
+			}
 		}
 	}
 }

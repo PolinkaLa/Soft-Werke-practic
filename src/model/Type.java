@@ -1,4 +1,4 @@
-package enums;
+package model;
 
 /**
  * @author LappoPolina перечисление для хранения типов устройст

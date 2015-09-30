@@ -3,9 +3,9 @@ package history;
 import java.util.List;
 import java.util.ArrayList;
 
-import base.Client;
-import base.Device;
-import base.Sale;
+import model.Client;
+import model.Device;
+import model.Sale;
 
 /**
  * @author LappoPolina Класс позволяет хранить списки Клиентов, Устройств и
@@ -19,26 +19,32 @@ public class AllHistory {
 	private List<Sale> sales = new ArrayList<>();
 
 	public List<Client> getClients() {
-		return clients;
+		List<Client> clientsCopy = new ArrayList<Client>();
+		clientsCopy.addAll(clients);
+		return clientsCopy;
 	}
 
 	public List<Device> getDevices() {
-		return devices;
+		List<Device> devicesCopy = new ArrayList<Device>();
+		devicesCopy.addAll(devices);
+		return devicesCopy;
 	}
 
 	public List<Sale> getSales() {
-		return sales;
+		List<Sale> salesCopy = new ArrayList<Sale>();
+		salesCopy.addAll(sales);
+		return salesCopy;
 	}
 
-	public final void setClients(Client client) {
+	public final void addClients(Client client) {
 		clients.add(client);
 	}
 
-	public final void setDevices(Device device) {
+	public final void addDevices(Device device) {
 		devices.add(device);
 	}
 
-	public final void setSales(Sale sale) {
+	public final void addSales(Sale sale) {
 		sales.add(sale);
 	}
 }

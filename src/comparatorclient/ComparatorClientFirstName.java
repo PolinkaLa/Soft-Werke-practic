@@ -2,9 +2,9 @@ package comparatorclient;
 
 import java.util.Comparator;
 
-import base.Client;
+import model.Client;
 
-public class ComparatorClientFirstName implements Comparator {
+public class ComparatorClientFirstName implements Comparator<Object> {
 	public int compare(Object arg0, Object arg1) {
 		if ((arg0 instanceof Client) & (arg1 instanceof Client)) {
 			Client user0 = (Client) arg0;

@@ -1,11 +1,7 @@
-package base;
+package model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import enums.Color;
-import enums.Mark;
-import enums.Type;
 
 /**
  * @author LappoPolina

@@ -1,4 +1,4 @@
-package menu;
+package controllers;
 
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -8,17 +8,16 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 
-import base.Client;
-import base.Device;
-import base.Sale;
 import comparatorclient.*;
 import comparatordevice.*;
 import comparatorsale.*;
-import enums.Color;
-import enums.Mark;
-import enums.Type;
-import controllers.Validation;
 import history.AllHistory;
+import model.Client;
+import model.Color;
+import model.Device;
+import model.Mark;
+import model.Sale;
+import model.Type;
 
 /**
  * @author LappoPolina
@@ -63,9 +62,9 @@ public class UserMenu {
 		String first = in.next();
 		String middle = in.next();
 		String dateBirth = in.next();
-		if (valid.isValidFirstName(first) & valid.isValidLastName(last) & valid.isValidMiddleName(middle)
+		if (valid.isValidName(first) & valid.isValidName(last) & valid.isValidName(middle)
 				& valid.isValidDate(dateBirth)) {
-			historyOfAllNotes.setClients(new Client(last, first, middle, valid.getDate()));
+			historyOfAllNotes.addClients(new Client(last, first, middle, valid.getDate()));
 			System.out.println("Client create successfully.");
 		} else
 			System.out.println("ERROR! Сannot create a record from Client, verify the accuracy of information entry");
@@ -99,16 +98,16 @@ public class UserMenu {
 																		// кодов
 																		// цветов
 
-		String mark = in.next();
-		String type = in.next();
+		int mark = in.nextInt();
+		int type = in.nextInt();
 		String model = in.next();
-		String color = in.next();
+		int color = in.nextInt();
 		String cos = in.next();
 		String date = in.next();
 		if (valid.isValidMark(mark) & valid.isValidType(type) & valid.isValidColor(color) & valid.isValidCost(cos)
 				& valid.isValidDate(date)) {
-			historyOfAllNotes.setDevices(new Device(Mark.values()[valid.getMark()], Type.values()[valid.getType()],
-					model, Color.values()[valid.getColor()], valid.getCost(), valid.getDate())); // добавление
+			historyOfAllNotes.addDevices(new Device(Mark.values()[mark], Type.values()[type],
+					model, Color.values()[color], valid.getCost(), valid.getDate())); // добавление
 																									// нового
 																									// устройства
 			System.out.println("Device create successfully.");
@@ -157,7 +156,7 @@ public class UserMenu {
 							"ERROR! Сannot create a record from Sale, verify the accuracy of information entry");
 			}
 			historyOfAllNotes
-					.setSales(new Sale(valid.getDate(), historyOfAllNotes.getClients().get(idClient - 1), checkSale));// новая
+					.addSales(new Sale(valid.getDate(), historyOfAllNotes.getClients().get(idClient - 1), checkSale));// новая
 																														// запись
 																														// о
 																														// продаже
@@ -190,7 +189,7 @@ public class UserMenu {
 	}
 
 	/**
-	 * Функция для вывода на экран списка списка продаж
+	 * Функция для вывода на экран списка продаж
 	 * 
 	 * @param historyOfAllNotes
 	 *            передаются списки клиентов, устройств, продаж
@@ -370,7 +369,7 @@ public class UserMenu {
 		System.out.println("Enter Last Name:");
 		String lastNameForSearch = in.next();
 		List<Client> resultOfSearch = new ArrayList<>();
-		if (valid.isValidLastName(lastNameForSearch)) {
+		if (valid.isValidName(lastNameForSearch)) {
 			for (int i = 0; i < historyOfAllNotes.getClients().size(); i++) {
 				if (historyOfAllNotes.getClients().get(i).getLastName().equals(lastNameForSearch)) {
 					resultOfSearch.add(historyOfAllNotes.getClients().get(i));
@@ -397,7 +396,7 @@ public class UserMenu {
 		System.out.println("Enter First Name:");
 		String firstNameForSearch = in.next();
 		List<Client> resultOfSearch = new ArrayList<>();
-		if (valid.isValidLastName(lastNameForSearch) & valid.isValidFirstName(firstNameForSearch)) {
+		if (valid.isValidName(lastNameForSearch) & valid.isValidName(firstNameForSearch)) {
 			for (int i = 0; i < historyOfAllNotes.getClients().size(); i++) {
 				if (historyOfAllNotes.getClients().get(i).getLastName().equals(lastNameForSearch)
 						& historyOfAllNotes.getClients().get(i).getFirstName().equals(firstNameForSearch)) {

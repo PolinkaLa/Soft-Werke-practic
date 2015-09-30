@@ -2,9 +2,9 @@ package comparatorsale;
 
 import java.util.Comparator;
 
-import base.Sale;
+import model.Sale;
 
-public class ComparatorSaleClient implements Comparator {
+public class ComparatorSaleClient implements Comparator<Object> {
 	public int compare(Object arg0, Object arg1) {
 		if ((arg0 instanceof Sale) & (arg1 instanceof Sale)) {
 			Sale user0 = (Sale) arg0;

@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import history.AllHistory;
+import model.*;
 
 
 /**
@@ -17,9 +18,6 @@ public class Validation {
 	private static SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
 	private Date date;
 	private double cost;
-	private int color;
-	private int type;
-	private int mark;
 
 	/**
 	 * функция для валидации даты
@@ -52,86 +50,52 @@ public class Validation {
 	 * @return true, если фамилия соответствует заданой маске, false в противном
 	 *         случае
 	 */
-	public boolean isValidLastName(String lastName) {
-		Pattern patternForLastName = Pattern.compile("^[A-Z]{1}+[a-z]+$");
-		Matcher matcherForLastName = patternForLastName.matcher(lastName);
-		return matcherForLastName.matches();
-	}
-
-	/**
-	 * функция для валидации ввода имени
-	 * 
-	 * @param firstName
-	 *            имя клиента
-	 * @return true, если имя соответствует заданой маске, false в противном
-	 *         случае
-	 */
-	public boolean isValidFirstName(String firstName) {
-		Pattern patternForFirstName = Pattern.compile("^[A-Z]{1}+[a-z]+$");
-		Matcher matcherForFirstName = patternForFirstName.matcher(firstName);
-		return matcherForFirstName.matches();
-	}
-
-	/**
-	 * функция для валидации ввода отчества
-	 * 
-	 * @param middleName
-	 *            отчества клиента
-	 * @return true, если отчество соответствует заданой маске, false в
-	 *         противном случае
-	 */
-	public boolean isValidMiddleName(String middleName) {
-		Pattern patternForMiddleName = Pattern.compile("^[A-Z]{1}+[a-z]+$");
-		Matcher matcherForMiddleName = patternForMiddleName.matcher(middleName);
-		return matcherForMiddleName.matches();
+	public boolean isValidName(String name) {
+		Pattern patternForName = Pattern.compile("^[A-Z]{1}+[a-z]+$");
+		Matcher matcherForName = patternForName.matcher(name);
+		return matcherForName.matches();
 	}
 
 	/**
 	 * функция для валидации ввода кода марки
 	 * 
 	 * @param mark
-	 *            строка с кодом марки если валидация прошла успешно,
-	 *            преобразуем строку в int
-	 * @return true, если соответствует заданой маске, false в противном случае
+	 *            строка с кодом марки 
+	 * @return true, если соответствует заданному диапазону, false в противном случае
 	 */
-	public boolean isValidMark(String mark) {
-		Pattern patternForMark = Pattern.compile("[0-4]{1}");
-		Matcher matcherForMark = patternForMark.matcher(mark);
-		if (matcherForMark.matches())
-			this.mark = Integer.parseInt(mark);
-		return matcherForMark.matches();
+	public boolean isValidMark(int mark) {
+		if ((mark >= 0) & (mark < Mark.values().length)) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
 	 * цункция для валидации ввода кода типа устройства
 	 * 
 	 * @param type
-	 *            строка с кодом типа усройства если валидация прошла успешно,
-	 *            преобразуем строку в int
-	 * @return true, если соответствует заданой маске, false в противном случае
+	 *            строка с кодом типа усройства 
+	 * @return true, если соответствует заданному диапазону, false в противном случае
 	 */
-	public boolean isValidType(String type) {
-		Pattern patternForType = Pattern.compile("[0-3]{1}");
-		Matcher matcherForType = patternForType.matcher(type);
-		if (matcherForType.matches())
-			this.type = Integer.parseInt(type);
-		return matcherForType.matches();
+	public boolean isValidType(int type) {
+		if ((type >= 0) & (type < Type.values().length)) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
 	 * функция для валидации кода цвета
 	 * 
 	 * @param color
-	 *            строка с кодом цвета если валидация прошла успешно,
-	 *            преобразуем строку в int
-	 * @return true, если соответствует заданой маске, false в противном случае
+	 *            строка с кодом цвета 
+	 * @return true, если соответствует заданному диапазону, false в противном случае
 	 */
-	public boolean isValidColor(String color) {
-		Pattern patternForColor = Pattern.compile("[0-6]{1}");
-		Matcher matcherForColor = patternForColor.matcher(color);
-		if (matcherForColor.matches())
-			this.color = Integer.parseInt(color);
-		return matcherForColor.matches();
+	public boolean isValidColor(int color) {
+		if ((color >= 0) & (color < Color.values().length)) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -145,8 +109,9 @@ public class Validation {
 	public boolean isValidCost(String cost) {
 		Pattern patternForCost = Pattern.compile("^[1-9]\\d*?(\\.\\d{1,2})?$");
 		Matcher matcherForCost = patternForCost.matcher(cost);
-		if (matcherForCost.matches())
+		if (matcherForCost.matches()) {
 			this.cost = Double.parseDouble(cost);
+		}
 		return matcherForCost.matches();
 	}
 
@@ -161,10 +126,10 @@ public class Validation {
 	 *         случае
 	 */
 	public boolean isValidClient(int idClient, AllHistory historyOfAllNotes) {
-		if (historyOfAllNotes.getClients().size() > idClient)
+		if (historyOfAllNotes.getClients().size() > idClient) {
 			return true;
-		else
-			return false;
+		}
+		return false;
 	}
 
 	/**
@@ -178,10 +143,10 @@ public class Validation {
 	 *         случае
 	 */
 	public boolean isValidDevice(int idDevice, AllHistory historyOfAllNotes) {
-		if (historyOfAllNotes.getDevices().size() > idDevice)
+		if (historyOfAllNotes.getDevices().size() > idDevice) {
 			return true;
-		else
-			return false;
+		}
+		return false;
 	}
 
 	public Date getDate() {
@@ -190,17 +155,5 @@ public class Validation {
 
 	public double getCost() {
 		return cost;
-	}
-
-	public int getColor() {
-		return color;
-	}
-
-	public int getType() {
-		return type;
-	}
-
-	public int getMark() {
-		return mark;
 	}
 }

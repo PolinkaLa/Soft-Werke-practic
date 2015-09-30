@@ -2,9 +2,9 @@ package comparatordevice;
 
 import java.util.Comparator;
 
-import base.Device;
+import model.Device;
 
-public class ComparatorDeviceCost implements Comparator {
+public class ComparatorDeviceCost implements Comparator<Object> {
 	public int compare(Object arg0, Object arg1) {
 		if ((arg0 instanceof Device) & (arg1 instanceof Device)) {
 			Device user0 = (Device) arg0;

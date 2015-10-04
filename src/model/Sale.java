@@ -6,11 +6,11 @@ import java.util.*;
 /**
  * @author LappoPolina
  * 
- *         Класс содержит сведения о продаже: уникальный номер, сведения о
- *         клиенте, сведения о покупаемых устройствах и их количество Так же
- *         имеются свойства для получения и изменения отдельных полей класса
- *         Переопределен метод toString() для того, что бы собирать данные о
- *         продаже в одну строку, для дальнейшего вывода на экран
+ *        Class contains information about the sale: a unique number, information about
+ * client, information about devices and their number 
+ * as well there are properties to retrieve and change individual fields of a class
+ * Overridden the toString() method in order to collect data about
+ * sale in one line, for further display
  */
 public class Sale {
 	private static int nextUniquelD = 1;
@@ -20,14 +20,14 @@ public class Sale {
 	private Map<Device, Integer> checkOfSale = new HashMap<Device, Integer>();
 
 	/**
-	 * Конструктор для инициализации экземпляра класса
+	 * Constructor to initialize the new created instance
 	 * 
 	 * @param dateOfSale
-	 *            даты продажи
+	 *            date of sale
 	 * @param client
-	 *            клиент совершивший покупку
+	 *            information about client
 	 * @param checkOfSale
-	 *            купленные устройсва и их количество
+	 *            information about device and their number
 	 */
 	public Sale(Date dateOfSale, Client client, Map<Device, Integer> checkOfSale) {
 		idSale = nextUniquelD++;
@@ -69,8 +69,8 @@ public class Sale {
 	}
 
 	/**
-	 * Переопределяемый метод для вывода информации о продаже Все данные о
-	 * продаже собирает в одну строку
+	 * Override method to output information about the sale
+	 * All the data about sale collects in one line
 	 * 
 	 * @return String
 	 */

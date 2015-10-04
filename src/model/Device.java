@@ -6,11 +6,12 @@ import java.util.Date;
 /**
  * @author LappoPolina
  * 
- *         Класс содержит сведения об устройстве: уникальный номер, марку, тип,
- *         модель, цвет, дату производства, стоимость Так же имеются свойства
- *         для получения и изменения отдельных полей класса Переопределен метод
- *         toString() для того, что бы собирать данные об устройстве в одну
- *         строку, для дальнейшего вывода на экран
+ *         The class contains information about the device: the unique number, mark, type,
+ * model, color, date of production, the cost
+ * of the same available properties to retrieve and change individual fields 
+ * of a class Overridden method toString()
+ * in order to collect data about your device in one
+ * a string for later display
  */
 public class Device {
 	private static int nextUniquelD = 1;
@@ -23,20 +24,20 @@ public class Device {
 	private int idDevice;
 
 	/**
-	 * Конструкторо для инициализации создаваемого экземпляра
+	 * Constructor to initialize the new created instance
 	 * 
 	 * @param mark
-	 *            марка устройства
+	 *            mark of device
 	 * @param type
-	 *            тип устройства
+	 *            type of device
 	 * @param model
-	 *            модель усройства
+	 *            model of device
 	 * @param color
-	 *            цвет устройства
+	 *            color of device
 	 * @param cost
-	 *            стоимость устройства
+	 *            cost of device
 	 * @param dateOfProduce
-	 *            дата производства устройсва
+	 *            date of produce device
 	 */
 	public Device(Mark mark, Type type, String model, Color color, double cost, Date dateOfProduce) {
 		this.mark = mark;
@@ -105,8 +106,8 @@ public class Device {
 	}
 
 	/**
-	 * Переопределяемый метод для вывода информации об устройстве Все данные об
-	 * устройстве собирает в одну строку
+	 * Override method to output information about the device
+	 * All the data about device collects in one line
 	 * 
 	 * @return String
 	 */

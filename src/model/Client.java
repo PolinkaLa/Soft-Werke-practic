@@ -6,11 +6,12 @@ import java.text.SimpleDateFormat;
 /**
  * @author LappoPolina
  * 
- *         Класс содержит сведения о клиенте: уникальный номер, фамилию, имя,
- *         отчетво и дату рождения Так же имеются свойства для получения и
- *         изменения отдельных полей класса Переопределен метод toString() для
- *         того, что бы собирать данные о клиенте в одну строку, для дальнейшего
- *         вывода на экран
+ * Class contains information about the client: unique number, last name, first name,
+ * middle name and date of birth also has properties for getting and
+ * change individual fields of a class
+ * Overridden toString() method for
+ * collect data about the client in one line, for further
+ * display
  */
 public class Client {
 	private static int nextUniquelD = 1;
@@ -21,18 +22,20 @@ public class Client {
 	private Date dateOfBirth;
 
 	/**
-	 * Конструктор Позволяет инициализировать экземпляры класса Например, для
-	 * создание Клиента с данными Лаппо Полина Владимировна 02.07.1994г. Нужно
-	 * ввести new Client("Lappo", "Polina", "Vladimirovna", 02.07.1994)
+	 * The constructor
+	 * Allows you to initialize instances of the class 
+	 * for example, 
+	 * create Client data Polina Lappo Vladimirovna 02.07.1994 
+	 * Need enter <code> new Client("Lappo", "Polina", "Vladimirovna", 02.07.1994) </code>
 	 * 
 	 * @param lastName
-	 *            Фамилия
+	 *            Last Name
 	 * @param firstName
-	 *            Имя
+	 *            First Name
 	 * @param middleName
-	 *            Отчество
+	 *            Middle Name
 	 * @param dateOfBirth
-	 *            Дата рождения
+	 *            Date of Birthday
 	 * 
 	 */
 	public Client(String lastName, String firstName, String middleName, Date dateOfBirth) {
@@ -84,8 +87,8 @@ public class Client {
 	}
 
 	/**
-	 * Переопределяемый метод для вывода информации о клиенте Все данные о
-	 * клиенте собирает в одну строку
+	 * Override method to output information about the client
+	 * All the data about client collects in one line
 	 * 
 	 * @return String
 	 */
@@ -99,15 +102,6 @@ public class Client {
 		return builder.toString();
 
 	}
-	/*
-	 * public void searchLastFirstName (AllHistory historyOfAllNotes, String
-	 * lastNameForSearch, String firstNameForSearch ) { for (Client user :
-	 * historyOfAllNotes.getClients()) { //String clientLastName =
-	 * user.getLastName(); //String clientFirstName = user.getFirstName(); if
-	 * (lastName.equals(lastNameForSearch) &&
-	 * firstName.equals(firstNameForSearch)) { System.out.println(
-	 * "We found client!"); } else System.out.println("We can't found client");
-	 * 
-	 * }}
-	 */
 }
+
+

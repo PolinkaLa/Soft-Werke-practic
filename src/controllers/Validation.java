@@ -6,31 +6,26 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import history.AllHistory;
+import history.*;
 import model.*;
 
 
 /**
- * @author LappoPolina класс содержит функции для проверки правильности вводимых
- *         данных
+ * the class contains methods for validation of input data
+ * @author LappoPolina
+ *
  */
 public class Validation {
 	private static SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-	private Date date;
 	private double cost;
-
+	private Date date;
+	
 	/**
-	 * функция для валидации даты
-	 * 
-	 * @param dateInString
-	 *            строка содержащая дату
-	 * @return true, если дата соответствует заданой маске, false в противном
-	 *         случае
+	 * method for validate date
+	 * @param dateInString date in format string
+	 * @return true if date valid, false else
 	 */
 	public boolean isValidDate(String dateInString) {
-		// Pattern patternForDate = Pattern.compile("(0[1-9]|[12][0-9]|3[01])[-
-		// /.](0[1-9]|1[012])[- /.](19|20)");
-		// Matcher matcherForDate = patternForDate.matcher(dateInString);
 		boolean flag = false;
 		try {
 			this.date = format.parse(dateInString);
@@ -43,12 +38,9 @@ public class Validation {
 	}
 
 	/**
-	 * Функция для валидации ввода фамилии
-	 * 
-	 * @param lastName
-	 *            фамилия клиента
-	 * @return true, если фамилия соответствует заданой маске, false в противном
-	 *         случае
+	 * method for validate last name, first name and middle name
+	 * @param name Last, First or Middle Name
+	 * @return true if name valid, false else
 	 */
 	public boolean isValidName(String name) {
 		Pattern patternForName = Pattern.compile("^[A-Z]{1}+[a-z]+$");
@@ -57,11 +49,9 @@ public class Validation {
 	}
 
 	/**
-	 * функция для валидации ввода кода марки
-	 * 
-	 * @param mark
-	 *            строка с кодом марки 
-	 * @return true, если соответствует заданному диапазону, false в противном случае
+	 * method for validate mark
+	 * @param mark code of mark
+	 * @return true if mark valid, false else
 	 */
 	public boolean isValidMark(int mark) {
 		if ((mark >= 0) & (mark < Mark.values().length)) {
@@ -71,11 +61,9 @@ public class Validation {
 	}
 
 	/**
-	 * цункция для валидации ввода кода типа устройства
-	 * 
-	 * @param type
-	 *            строка с кодом типа усройства 
-	 * @return true, если соответствует заданному диапазону, false в противном случае
+	 * method for validate type
+	 * @param type code of type
+	 * @return true if type valid, false else
 	 */
 	public boolean isValidType(int type) {
 		if ((type >= 0) & (type < Type.values().length)) {
@@ -85,11 +73,9 @@ public class Validation {
 	}
 
 	/**
-	 * функция для валидации кода цвета
-	 * 
-	 * @param color
-	 *            строка с кодом цвета 
-	 * @return true, если соответствует заданному диапазону, false в противном случае
+	 * method for validate color
+	 * @param color code of color
+	 * @return true if color valid, false else
 	 */
 	public boolean isValidColor(int color) {
 		if ((color >= 0) & (color < Color.values().length)) {
@@ -99,12 +85,9 @@ public class Validation {
 	}
 
 	/**
-	 * функция для валидации ввода цены
-	 * 
-	 * @param cost
-	 *            строка со стоимостью устройсва если валидация прошла успешно,
-	 *            преобразуем строку в double
-	 * @return true, если соответствует заданой маске, false в противном случае
+	 * method for validate cost
+	 * @param cost cost in format string
+	 * @return true if cost valid, false else
 	 */
 	public boolean isValidCost(String cost) {
 		Pattern patternForCost = Pattern.compile("^[1-9]\\d*?(\\.\\d{1,2})?$");
@@ -116,44 +99,35 @@ public class Validation {
 	}
 
 	/**
-	 * функция для проверки существования клиента с таким Id
-	 * 
-	 * @param idClient
-	 *            уникальный номер клиента
-	 * @param historyOfAllNotes
-	 *            коллекция со списком клиентов
-	 * @return true, если клиент с таким Id есть в списке, false в противном
-	 *         случае
+	 * method for validate client
+	 * @param idClient unique number f client
+	 * @param historyClient list of clients
+	 * @return true if historyClient contain client with idClient , false else
 	 */
-	public boolean isValidClient(int idClient, AllHistory historyOfAllNotes) {
-		if (historyOfAllNotes.getClients().size() > idClient) {
+	public boolean isValidClient(int idClient, HistoryClient historyClient) {
+		if (historyClient.getClients().size() > idClient) {
 			return true;
 		}
 		return false;
 	}
 
 	/**
-	 * функция для проверки существования устройства с таким Id
-	 * 
-	 * @param idDevice
-	 *            уникальный номер устройства
-	 * @param historyOfAllNotes
-	 *            коллекция со списком устройств
-	 * @return true, если устройство с таким Id есть в списке, false в противном
-	 *         случае
+	 * method for validate device
+	 * @param idDevice unique number of device
+	 * @param historyDevice list of devices
+	 * @return true if historyDevice contain device with idDevice , false else
 	 */
-	public boolean isValidDevice(int idDevice, AllHistory historyOfAllNotes) {
-		if (historyOfAllNotes.getDevices().size() > idDevice) {
+	public boolean isValidDevice(int idDevice, HistoryDevice historyDevice) {
+		if (historyDevice.getDevices().size() > idDevice) {
 			return true;
 		}
 		return false;
 	}
 
-	public Date getDate() {
-		return (Date) date.clone();
-	}
-
 	public double getCost() {
 		return cost;
+	}
+	public Date getDate() {
+		return date;
 	}
 }

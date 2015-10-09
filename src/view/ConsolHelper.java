@@ -1,13 +1,12 @@
 package view;
 
-import java.util.Scanner;
 import controllers.MethodsForClient;
 import controllers.MethodsForDevice;
 import controllers.MethodsForSale;
+import controllers.Utilit;
 import history.*;
 
 public class ConsolHelper {
-	private static Scanner in = new Scanner(System.in);
 	private static HistoryClient historyOfClient = new HistoryClient();
 	private static HistoryDevice historyOfDevice = new HistoryDevice();
 	private static HistorySale historyOfSale = new HistorySale();
@@ -40,7 +39,7 @@ public class ConsolHelper {
 		while (true) {
 			System.out.println("Enter comad:");
 
-			switch (in.next()) {
+			switch (Utilit.in.next()) {
 
 			case "createClient": 
 				MethodsForClient.createClient(historyOfClient);
@@ -79,7 +78,7 @@ public class ConsolHelper {
 				MethodsForSale.showListSale(historyOfSale);
 				break;
 			case "exit": 
-				in.close();
+				Utilit.in.close();
 				System.out.println("Bye! Bye!");
 				System.exit(0);
 				break;
@@ -88,15 +87,15 @@ public class ConsolHelper {
 				break;
 			}
 		}
-		}
+	}
 
 	/**
 	 * display command list for sort information about client
 	 */
-	public static void comandSortClient() {
+	private static void comandSortClient() {
 		System.out.println("On what basis will sort (Date, LastName, FirstName, MiddeleName):");
 
-		switch (in.next()) {
+		switch (Utilit.in.next()) {
 		case "Date":
 			MethodsForClient.sortByDateClientList(historyOfClient);
 			break;
@@ -115,10 +114,10 @@ public class ConsolHelper {
 	/**
 	 * display command list for sort information about device
 	 */
-	public static void comandSortDevice() {
+	private static void comandSortDevice() {
 		System.out.println("On what basis will sort (Date, Type, Mark, Model, Color, Cost):");
 
-		switch (in.next()) {
+		switch (Utilit.in.next()) {
 		case "Date":
 			MethodsForDevice.sortByDateDeviceList(historyOfDevice);
 			break;
@@ -146,10 +145,10 @@ public class ConsolHelper {
 	/**
 	 * display command list for search information about client
 	 */
-	public static void comandSearchClient() {
+	private static void comandSearchClient() {
 		System.out.println("On what basis will search (Date, LastName, LastFirstName, LastNameDate):");
 
-		switch (in.next()) {
+		switch (Utilit.in.next()) {
 		case "Date":
 			MethodsForClient.searchClientByDate(historyOfClient);
 			break;
@@ -171,11 +170,11 @@ public class ConsolHelper {
 	/**
 	 * display command list for search information about device
 	 */
-	public static void comandSearchDevice() {
+	private static void comandSearchDevice() {
 		System.out.println("On what basis will search (Date, Mark, Model, Type, Color, Cost,"
 				+ " DateMark, ModelColor, MarkType, TypeCost):");
 		
-		switch (in.next()) {
+		switch (Utilit.in.next()) {
 		case "Date":
 			MethodsForDevice.searchDeviceByDate(historyOfDevice);
 			break;

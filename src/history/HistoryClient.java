@@ -13,7 +13,7 @@ import model.Client;
 public class HistoryClient {
 	private List<Client> clients = new ArrayList<>();
 	
-	public List<Client> getClients() {
+	public List<Client> getUnchangedCopy() {
 		List<Client> clientsCopy = new ArrayList<Client>();
 		clientsCopy.addAll(clients);
 		return clientsCopy;
@@ -21,6 +21,11 @@ public class HistoryClient {
 	public final void addClients(Client client) {
 		clients.add(client);
 	}
-
-
+	
+	public void setClients(List<Client> clients) {
+		this.clients = clients;
+	}
+	public List<Client> getChangedCopy() {
+		return clients;
+	}
 }

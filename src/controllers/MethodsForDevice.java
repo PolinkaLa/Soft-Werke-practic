@@ -3,7 +3,6 @@ package controllers;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Scanner;
 import history.HistoryDevice;
 import model.Color;
 import model.Device;
@@ -16,8 +15,6 @@ import model.Type;
  *
  */
 public class MethodsForDevice {
-	private static Scanner in = new Scanner(System.in);
-	private static Validation valid = new Validation();
 
 	/** 
 	 * method for create a new record about device on list of devices
@@ -39,17 +36,17 @@ public class MethodsForDevice {
 		for (int i = 0; i < Color.values().length; i++)
 			System.out.println("	" + i + " - " + Color.values()[i]); 
 
-		int mark = in.nextInt();
-		int type = in.nextInt();
-		String model = in.next();
-		int color = in.nextInt();
-		String cos = in.next();
-		String date = in.next();
-		if (valid.isValidMark(mark) & valid.isValidType(type) & valid.isValidColor(color) 
-				& valid.isValidCost(cos)
-				& valid.isValidDate(date)) {
+		int mark = Utilit.in.nextInt();
+		int type = Utilit.in.nextInt();
+		String model = Utilit.in.next();
+		int color = Utilit.in.nextInt();
+		String cos = Utilit.in.next();
+		String date = Utilit.in.next();
+		if (Utilit.valid.isValidMark(mark) & Utilit.valid.isValidType(type) & Utilit.valid.isValidColor(color) 
+				& Utilit.valid.isValidCost(cos)
+				& Utilit.valid.isValidDate(date)) {
 			historyDevice.addDevices(new Device(Mark.values()[mark], Type.values()[type],
-					model, Color.values()[color], valid.getCost(), valid.getDate())); 
+					model, Color.values()[color], Utilit.valid.getCost(), Utilit.valid.getDate())); 
 			System.out.println("Device create successfully.");
 		} else
 			System.out.println("ERROR! Ñannot create a record from Device, verify the accuracy "
@@ -61,8 +58,8 @@ public class MethodsForDevice {
 	 * @param historyDevice list of devices
 	 */
 	public static void showListDevice(HistoryDevice historyDevice) {
-		for (int i = 0; i < historyDevice.getDevices().size(); i++)
-			System.out.println(historyDevice.getDevices().get(i).toString());
+		for (int i = 0; i < historyDevice.getUnchangedCopy().size(); i++)
+			System.out.println(historyDevice.getUnchangedCopy().get(i).toString());
 	}
 	
 	/**
@@ -71,8 +68,10 @@ public class MethodsForDevice {
 	 */
 	public static void sortByDateDeviceList(HistoryDevice historyDevice) {
 		ComparatorDeviceDate comparatorDeviceDate = new ComparatorDeviceDate();
-		Collections.sort(historyDevice.getDevices(), comparatorDeviceDate);
-		showListDevice(historyDevice);
+		HistoryDevice historyDeviceCopy = new HistoryDevice();
+		historyDeviceCopy.setDevices(historyDevice.getUnchangedCopy());
+		Collections.sort(historyDeviceCopy.getChangedCopy(), comparatorDeviceDate);
+		showListDevice(historyDeviceCopy);
 	}
 
 	/**
@@ -81,18 +80,22 @@ public class MethodsForDevice {
 	 */
 	public static void sortByMarkDeviceList(HistoryDevice historyDevice) {
 		ComparatorDeviceMark comparatorDeviceMark = new ComparatorDeviceMark();
-		Collections.sort(historyDevice.getDevices(), comparatorDeviceMark);
-		showListDevice(historyDevice);
+		HistoryDevice historyDeviceCopy = new HistoryDevice();
+		historyDeviceCopy.setDevices(historyDevice.getUnchangedCopy());
+		Collections.sort(historyDeviceCopy.getChangedCopy(), comparatorDeviceMark);
+		showListDevice(historyDeviceCopy);
 	}
 
 	/**
 	 * method for sort list of devices by Model and show result
 	 * @param historyDevice list of devices
 	 */
-	public static void sortByModelDeviceList(HistoryDevice historyDevices) {
+	public static void sortByModelDeviceList(HistoryDevice historyDevice) {
 		ComparatorDeviceModel comparatorDeviceModel = new ComparatorDeviceModel();
-		Collections.sort(historyDevices.getDevices(), comparatorDeviceModel);
-		showListDevice(historyDevices);
+		HistoryDevice historyDeviceCopy = new HistoryDevice();
+		historyDeviceCopy.setDevices(historyDevice.getUnchangedCopy());
+		Collections.sort(historyDeviceCopy.getChangedCopy(), comparatorDeviceModel);
+		showListDevice(historyDeviceCopy);
 	}
 
 	/**
@@ -101,8 +104,10 @@ public class MethodsForDevice {
 	 */
 	public static void sortByColorDeviceList(HistoryDevice historyDevice) {
 		ComparatorDeviceColor comparatorDeviceColor = new ComparatorDeviceColor();
-		Collections.sort(historyDevice.getDevices(), comparatorDeviceColor);
-		showListDevice(historyDevice);
+		HistoryDevice historyDeviceCopy = new HistoryDevice();
+		historyDeviceCopy.setDevices(historyDevice.getUnchangedCopy());
+		Collections.sort(historyDeviceCopy.getChangedCopy(), comparatorDeviceColor);
+		showListDevice(historyDeviceCopy);
 	}
 
 	/**
@@ -111,8 +116,10 @@ public class MethodsForDevice {
 	 */
 	public static void sortByTypeDeviceList(HistoryDevice historyDevice) {
 		ComparatorDeviceType comparatorDeviceType = new ComparatorDeviceType();
-		Collections.sort(historyDevice.getDevices(), comparatorDeviceType);
-		showListDevice(historyDevice);
+		HistoryDevice historyDeviceCopy = new HistoryDevice();
+		historyDeviceCopy.setDevices(historyDevice.getUnchangedCopy());
+		Collections.sort(historyDeviceCopy.getChangedCopy(), comparatorDeviceType);
+		showListDevice(historyDeviceCopy);
 	}
 
 	/**
@@ -121,8 +128,10 @@ public class MethodsForDevice {
 	 */
 	public static void sortByCostDeviceListAndShow(HistoryDevice historyDevice) {
 		ComparatorDeviceCost comparatorDeviceCost = new ComparatorDeviceCost();
-		Collections.sort(historyDevice.getDevices(), comparatorDeviceCost);
-		showListDevice(historyDevice);
+		HistoryDevice historyDeviceCopy = new HistoryDevice();
+		historyDeviceCopy.setDevices(historyDevice.getUnchangedCopy());
+		Collections.sort(historyDeviceCopy.getChangedCopy(), comparatorDeviceCost);
+		showListDevice(historyDeviceCopy);
 	}
 
 	/**
@@ -131,12 +140,12 @@ public class MethodsForDevice {
 	 */
 	public static void searchDeviceByDate(HistoryDevice historyDevice) {
 		System.out.println("Enter date:");
-		String dataForSearch = in.next();
+		String dataForSearch = Utilit.in.next();
 		List<Device> resultOfSearch = new ArrayList<>();
-		if (valid.isValidDate(dataForSearch)) {
-			for (int i = 0; i < historyDevice.getDevices().size(); i++) {
-				if (historyDevice.getDevices().get(i).getDateOfProduce().equals(valid.getDate())) {
-					resultOfSearch.add(historyDevice.getDevices().get(i));
+		if (Utilit.valid.isValidDate(dataForSearch)) {
+			for (int i = 0; i < historyDevice.getUnchangedCopy().size(); i++) {
+				if (historyDevice.getUnchangedCopy().get(i).getDateOfProduce().equals(Utilit.valid.getDate())) {
+					resultOfSearch.add(historyDevice.getUnchangedCopy().get(i));
 				}
 			}
 			if (resultOfSearch.size() > 0) {
@@ -157,12 +166,12 @@ public class MethodsForDevice {
 		for (int i = 0; i < Mark.values().length; i++)
 			System.out.println("	" + i + " - " + Mark.values()[i]);
 		System.out.println("Enter code of Mark:");
-		int mark = in.nextInt();
+		int mark = Utilit.in.nextInt();
 		List<Device> resultOfSearch = new ArrayList<>();
-		if (valid.isValidMark(mark)){
-			for (int i = 0; i < historyDevice.getDevices().size(); i++) {
-				if (historyDevice.getDevices().get(i).getMark().equals(mark)) {
-					resultOfSearch.add(historyDevice.getDevices().get(i));
+		if (Utilit.valid.isValidMark(mark)){
+			for (int i = 0; i < historyDevice.getUnchangedCopy().size(); i++) {
+				if (historyDevice.getUnchangedCopy().get(i).getMark().equals(mark)) {
+					resultOfSearch.add(historyDevice.getUnchangedCopy().get(i));
 				}
 			}
 			if (resultOfSearch.size() > 0) {
@@ -180,11 +189,11 @@ public class MethodsForDevice {
 	 */
 	public static void searchDeviceByModel(HistoryDevice historyDevice) {
 		System.out.println("Enter Model:");
-		String model = in.next();
+		String model = Utilit.in.next();
 		List<Device> resultOfSearch = new ArrayList<>();
-		for (int i = 0; i < historyDevice.getDevices().size(); i++) {
-				if (historyDevice.getDevices().get(i).getModel().equals(model)) {
-					resultOfSearch.add(historyDevice.getDevices().get(i));
+		for (int i = 0; i < historyDevice.getUnchangedCopy().size(); i++) {
+				if (historyDevice.getUnchangedCopy().get(i).getModel().equals(model)) {
+					resultOfSearch.add(historyDevice.getUnchangedCopy().get(i));
 				}
 			}
 		if (resultOfSearch.size() > 0) {
@@ -203,12 +212,12 @@ public class MethodsForDevice {
 		for (int i = 0; i < Type.values().length; i++)
 			System.out.println("	" + i + " - " + Type.values()[i]);
 		System.out.println("Enter code of Type:");
-		int type = in.nextInt();
+		int type = Utilit.in.nextInt();
 		List<Device> resultOfSearch = new ArrayList<>();
-		if (valid.isValidType(type)){
-			for (int i = 0; i < historyDevice.getDevices().size(); i++) {
-				if (historyDevice.getDevices().get(i).getType().equals(type)) {
-					resultOfSearch.add(historyDevice.getDevices().get(i));
+		if (Utilit.valid.isValidType(type)){
+			for (int i = 0; i < historyDevice.getUnchangedCopy().size(); i++) {
+				if (historyDevice.getUnchangedCopy().get(i).getType().equals(type)) {
+					resultOfSearch.add(historyDevice.getUnchangedCopy().get(i));
 				}
 			}
 			if (resultOfSearch.size() > 0) {
@@ -229,12 +238,12 @@ public class MethodsForDevice {
 		for (int i = 0; i < Color.values().length; i++)
 			System.out.println("	" + i + " - " + Color.values()[i]);
 		System.out.println("Enter code of Color:");
-		int color = in.nextInt();
+		int color = Utilit.in.nextInt();
 		List<Device> resultOfSearch = new ArrayList<>();
-		if (valid.isValidColor(color)){
-			for (int i = 0; i < historyDevice.getDevices().size(); i++) {
-				if (historyDevice.getDevices().get(i).getColor().equals(color)) {
-					resultOfSearch.add(historyDevice.getDevices().get(i));
+		if (Utilit.valid.isValidColor(color)){
+			for (int i = 0; i < historyDevice.getUnchangedCopy().size(); i++) {
+				if (historyDevice.getUnchangedCopy().get(i).getColor().equals(color)) {
+					resultOfSearch.add(historyDevice.getUnchangedCopy().get(i));
 				}
 			}
 			if (resultOfSearch.size() > 0) {
@@ -252,12 +261,12 @@ public class MethodsForDevice {
 	 */
 	public static void searchDeviceByCost(HistoryDevice historyDevice) {
 		System.out.println("Enter cost:");
-		String cost = in.next();
+		String cost = Utilit.in.next();
 		List<Device> resultOfSearch = new ArrayList<>();
-		if (valid.isValidCost(cost)) {
-			for (int i = 0; i < historyDevice.getDevices().size(); i++) {
-				if (historyDevice.getDevices().get(i).getCost().equals(valid.getCost())) {
-					resultOfSearch.add(historyDevice.getDevices().get(i));
+		if (Utilit.valid.isValidCost(cost)) {
+			for (int i = 0; i < historyDevice.getUnchangedCopy().size(); i++) {
+				if (historyDevice.getUnchangedCopy().get(i).getCost().equals(Utilit.valid.getCost())) {
+					resultOfSearch.add(historyDevice.getUnchangedCopy().get(i));
 				}
 			}
 			if (resultOfSearch.size() > 0) {
@@ -278,16 +287,16 @@ public class MethodsForDevice {
 		for (int i = 0; i < Mark.values().length; i++)
 			System.out.println("	" + i + " - " + Mark.values()[i]);
 		System.out.println("Enter code of Mark:");
-		int mark = in.nextInt();
+		int mark = Utilit.in.nextInt();
 		System.out.println("Enter date:");
-		String data = in.next();
+		String data = Utilit.in.next();
 		List<Device> resultOfSearch = new ArrayList<>();
-		if(valid.isValidDate(data) & valid.isValidMark(mark)) {
-			for (int i = 0; i < historyDevice.getDevices().size(); i++) {
-				if (historyDevice.getDevices().get(i).getMark().equals(mark)
-						& historyDevice.getDevices().get(i).getDateOfProduce()
-						.equals(valid.getDate())) {
-					resultOfSearch.add(historyDevice.getDevices().get(i));
+		if(Utilit.valid.isValidDate(data) & Utilit.valid.isValidMark(mark)) {
+			for (int i = 0; i < historyDevice.getUnchangedCopy().size(); i++) {
+				if (historyDevice.getUnchangedCopy().get(i).getMark().equals(mark)
+						& historyDevice.getUnchangedCopy().get(i).getDateOfProduce()
+						.equals(Utilit.valid.getDate())) {
+					resultOfSearch.add(historyDevice.getUnchangedCopy().get(i));
 				}
 			}
 			if (resultOfSearch.size() > 0) {
@@ -309,20 +318,20 @@ public class MethodsForDevice {
 		for (int i = 0; i < Mark.values().length; i++)
 			System.out.println("	" + i + " - " + Mark.values()[i]);
 		System.out.println("Enter code of Mark:");
-		int mark = in.nextInt();
+		int mark = Utilit.in.nextInt();
 		
 		System.out.println("Code of Type:");
 		for (int i = 0; i < Type.values().length; i++)
 			System.out.println("	" + i + " - " + Type.values()[i]);
 		System.out.println("Enter code of Type:");
-		int type = in.nextInt();
+		int type = Utilit.in.nextInt();
 		List<Device> resultOfSearch = new ArrayList<>();
-		if(valid.isValidType(type) & valid.isValidMark(mark)) {
-			for (int i = 0; i < historyDevice.getDevices().size(); i++) {
-				if (historyDevice.getDevices().get(i).getMark().equals(mark)
-						& historyDevice.getDevices().get(i).getType()
+		if(Utilit.valid.isValidType(type) & Utilit.valid.isValidMark(mark)) {
+			for (int i = 0; i < historyDevice.getUnchangedCopy().size(); i++) {
+				if (historyDevice.getUnchangedCopy().get(i).getMark().equals(mark)
+						& historyDevice.getUnchangedCopy().get(i).getType()
 						.equals(type)) {
-					resultOfSearch.add(historyDevice.getDevices().get(i));
+					resultOfSearch.add(historyDevice.getUnchangedCopy().get(i));
 				}
 			}
 			if (resultOfSearch.size() > 0) {
@@ -344,15 +353,15 @@ public class MethodsForDevice {
 		for (int i = 0; i < Color.values().length; i++)
 			System.out.println("	" + i + " - " + Color.values()[i]);
 		System.out.println("Enter code of Color:");
-		int color = in.nextInt();
-		String model = in.next();
+		int color = Utilit.in.nextInt();
+		String model = Utilit.in.next();
 		List<Device> resultOfSearch = new ArrayList<>();
-		if(valid.isValidColor(color)) {
-			for (int i = 0; i < historyDevice.getDevices().size(); i++) {
-				if (historyDevice.getDevices().get(i).getColor().equals(color)
-						& historyDevice.getDevices().get(i).getModel()
+		if(Utilit.valid.isValidColor(color)) {
+			for (int i = 0; i < historyDevice.getUnchangedCopy().size(); i++) {
+				if (historyDevice.getUnchangedCopy().get(i).getColor().equals(color)
+						& historyDevice.getUnchangedCopy().get(i).getModel()
 						.equals(model)) {
-					resultOfSearch.add(historyDevice.getDevices().get(i));
+					resultOfSearch.add(historyDevice.getUnchangedCopy().get(i));
 				}
 			}
 			if (resultOfSearch.size() > 0) {
@@ -374,15 +383,15 @@ public class MethodsForDevice {
 		for (int i = 0; i < Type.values().length; i++)
 			System.out.println("	" + i + " - " + Type.values()[i]);
 		System.out.println("Enter code of Type:");
-		int type = in.nextInt();
-		String cost = in.next();
+		int type = Utilit.in.nextInt();
+		String cost = Utilit.in.next();
 		List<Device> resultOfSearch = new ArrayList<>();
-		if(valid.isValidType(type) & valid.isValidCost(cost)) {
-			for (int i = 0; i < historyDevice.getDevices().size(); i++) {
-				if (historyDevice.getDevices().get(i).getCost().equals(valid.getCost())
-						& historyDevice.getDevices().get(i).getType()
+		if(Utilit.valid.isValidType(type) & Utilit.valid.isValidCost(cost)) {
+			for (int i = 0; i < historyDevice.getUnchangedCopy().size(); i++) {
+				if (historyDevice.getUnchangedCopy().get(i).getCost().equals(Utilit.valid.getCost())
+						& historyDevice.getUnchangedCopy().get(i).getType()
 						.equals(type)) {
-					resultOfSearch.add(historyDevice.getDevices().get(i));
+					resultOfSearch.add(historyDevice.getUnchangedCopy().get(i));
 				}
 			}
 			if (resultOfSearch.size() > 0) {

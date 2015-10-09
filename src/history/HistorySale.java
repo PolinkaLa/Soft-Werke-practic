@@ -16,7 +16,7 @@ public class HistorySale {
 
 private List<Sale> sales = new ArrayList<>();
 
-	public List<Sale> getSales() {
+	public List<Sale> getUnchangedCopy() {
 		List<Sale> salesCopy = new ArrayList<Sale>();
 		salesCopy.addAll(sales);
 		return salesCopy;
@@ -29,5 +29,11 @@ private List<Sale> sales = new ArrayList<>();
 		Map<Device, Integer> deviceCopy = new HashMap<Device, Integer>();
 		deviceCopy.putAll(sales.get(idClient).getCheckOfSle());
 		return deviceCopy;
+	}
+	public void setSale(List<Sale> sales) {
+		this.sales = sales;
+	}
+	public List<Sale> getChangedCopy() {
+		return sales;
 	}
 }

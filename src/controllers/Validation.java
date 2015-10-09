@@ -105,7 +105,7 @@ public class Validation {
 	 * @return true if historyClient contain client with idClient , false else
 	 */
 	public boolean isValidClient(int idClient, HistoryClient historyClient) {
-		if (historyClient.getClients().size() > idClient) {
+		if (historyClient.getUnchangedCopy().size() > idClient) {
 			return true;
 		}
 		return false;
@@ -118,7 +118,7 @@ public class Validation {
 	 * @return true if historyDevice contain device with idDevice , false else
 	 */
 	public boolean isValidDevice(int idDevice, HistoryDevice historyDevice) {
-		if (historyDevice.getDevices().size() > idDevice) {
+		if (historyDevice.getUnchangedCopy().size() > idDevice) {
 			return true;
 		}
 		return false;

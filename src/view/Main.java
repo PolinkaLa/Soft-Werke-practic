@@ -9,6 +9,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		ConsolHelper.helpForUser();		
+		ConsolHelper.helpForUser();
+		ConsolHelper.comand();
 	}
 }

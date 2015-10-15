@@ -4,6 +4,8 @@ import controllers.MethodsForClient;
 import controllers.MethodsForDevice;
 import controllers.MethodsForSale;
 import controllers.Utilit;
+import exception.CreateNewRecordException;
+import exception.ValidationException;
 import history.*;
 
 public class ConsolHelper {
@@ -39,16 +41,28 @@ public class ConsolHelper {
 		while (true) {
 			System.out.println("Enter comad:");
 
-			switch (Utilit.in.next()) {
+			switch (Utilit.IN.next()) {
 
 			case "createClient": 
-				MethodsForClient.createClient(historyOfClient);
+				try {
+					MethodsForClient.createClient(historyOfClient);
+				} catch (CreateNewRecordException e) {
+					e.showError();
+				}
 				break;
 			case "createDevice": 
-				MethodsForDevice.createDevice(historyOfDevice);
+				try {
+					MethodsForDevice.createDevice(historyOfDevice);
+				} catch (CreateNewRecordException e) {
+					e.showError();
+				}
 				break;
 			case "createSale": 
-				MethodsForSale.createSale(historyOfSale, historyOfClient, historyOfDevice);
+				try {
+					MethodsForSale.createSale(historyOfSale, historyOfClient, historyOfDevice);
+				} catch (CreateNewRecordException e) {
+					e.showError();
+				}
 				break;
 			case "sortListClient": 
 				comandSortClient();
@@ -66,7 +80,11 @@ public class ConsolHelper {
 				comandSearchDevice();
 				break;
 			case "searchOnListSale":
-				MethodsForSale.searchSaleByDate(historyOfSale);
+				try {
+					MethodsForSale.searchSaleByDate(historyOfSale);
+				} catch (ValidationException e) {
+					e.showError();
+				}
 				break;
 			case "showListClient": 
 				MethodsForClient.showListClient(historyOfClient);
@@ -78,7 +96,7 @@ public class ConsolHelper {
 				MethodsForSale.showListSale(historyOfSale);
 				break;
 			case "exit": 
-				Utilit.in.close();
+				Utilit.IN.close();
 				System.out.println("Bye! Bye!");
 				System.exit(0);
 				break;
@@ -95,7 +113,7 @@ public class ConsolHelper {
 	private static void comandSortClient() {
 		System.out.println("On what basis will sort (Date, LastName, FirstName, MiddeleName):");
 
-		switch (Utilit.in.next()) {
+		switch (Utilit.IN.next()) {
 		case "Date":
 			MethodsForClient.sortByDateClientList(historyOfClient);
 			break;
@@ -117,7 +135,7 @@ public class ConsolHelper {
 	private static void comandSortDevice() {
 		System.out.println("On what basis will sort (Date, Type, Mark, Model, Color, Cost):");
 
-		switch (Utilit.in.next()) {
+		switch (Utilit.IN.next()) {
 		case "Date":
 			MethodsForDevice.sortByDateDeviceList(historyOfDevice);
 			break;
@@ -148,18 +166,34 @@ public class ConsolHelper {
 	private static void comandSearchClient() {
 		System.out.println("On what basis will search (Date, LastName, LastFirstName, LastNameDate):");
 
-		switch (Utilit.in.next()) {
+		switch (Utilit.IN.next()) {
 		case "Date":
-			MethodsForClient.searchClientByDate(historyOfClient);
+			try {
+				MethodsForClient.searchClientByDate(historyOfClient);
+			} catch (ValidationException e) {
+				e.showError();
+			}
 			break;
 		case "LastName":
-			MethodsForClient.searchClientByLastName(historyOfClient);
+			try {
+				MethodsForClient.searchClientByLastName(historyOfClient);
+			} catch (ValidationException e) {
+				e.showError();
+			}
 			break;
 		case "LastFirstName":
-			MethodsForClient.searchClientByLastFirstName(historyOfClient);
+			try {
+				MethodsForClient.searchClientByLastFirstName(historyOfClient);
+			} catch (ValidationException e) {
+				e.showError();
+			}
 			break;
 		case "LastNameDate":
-			MethodsForClient.searchClientByLastNameDate(historyOfClient);
+			try {
+				MethodsForClient.searchClientByLastNameDate(historyOfClient);
+			} catch (ValidationException e) {
+				e.showError();
+			}
 			break;
 		default: 
 			System.out.println("ERROR. Unknown comand. Try again");
@@ -174,36 +208,76 @@ public class ConsolHelper {
 		System.out.println("On what basis will search (Date, Mark, Model, Type, Color, Cost,"
 				+ " DateMark, ModelColor, MarkType, TypeCost):");
 		
-		switch (Utilit.in.next()) {
+		switch (Utilit.IN.next()) {
 		case "Date":
-			MethodsForDevice.searchDeviceByDate(historyOfDevice);
+			try {
+				MethodsForDevice.searchDeviceByDate(historyOfDevice);
+			} catch (ValidationException e) {
+				e.showError();
+			}
 			break;
 		case "Mark":
-			MethodsForDevice.searchDeviceByMark(historyOfDevice);
+			try {
+				MethodsForDevice.searchDeviceByMark(historyOfDevice);
+			} catch (ValidationException e) {
+				e.showError();
+			}
 			break;
 		case "Model":
-			MethodsForDevice.searchDeviceByModel(historyOfDevice);
+			try {
+				MethodsForDevice.searchDeviceByModel(historyOfDevice);
+			} catch (ValidationException e) {
+				e.showError();
+			}
 			break;
 		case "Type":
-			MethodsForDevice.searchDeviceByType(historyOfDevice);
+			try {
+				MethodsForDevice.searchDeviceByType(historyOfDevice);
+			} catch (ValidationException e) {
+				e.showError();
+			}
 			break;
 		case "Color":
-			MethodsForDevice.searchDeviceByColor(historyOfDevice);
+			try {
+				MethodsForDevice.searchDeviceByColor(historyOfDevice);
+			} catch (ValidationException e) {
+				e.showError();
+			}
 			break;
 		case "Cost":
-			MethodsForDevice.searchDeviceByCost(historyOfDevice);
+			try {
+				MethodsForDevice.searchDeviceByCost(historyOfDevice);
+			} catch (ValidationException e) {
+				e.showError();
+			}
 			break;
 		case "DateMark":
-			MethodsForDevice.searchDeviceByDateMark(historyOfDevice);
+			try {
+				MethodsForDevice.searchDeviceByDateMark(historyOfDevice);
+			} catch (ValidationException e) {
+				e.showError();
+			}
 			break;
 		case "ModelColor":
-			MethodsForDevice.searchDeviceByModelColor(historyOfDevice);
+			try {
+				MethodsForDevice.searchDeviceByModelColor(historyOfDevice);
+			} catch (ValidationException e) {
+				e.showError();
+			}
 			break;
 		case "MarkType":
-			MethodsForDevice.searchDeviceByMarkType(historyOfDevice);
+			try {
+				MethodsForDevice.searchDeviceByMarkType(historyOfDevice);
+			} catch (ValidationException e) {
+				e.showError();
+			}
 			break;
 		case "TypeCost":
-			MethodsForDevice.searchDeviceByTypeCost(historyOfDevice);
+			try {
+				MethodsForDevice.searchDeviceByTypeCost(historyOfDevice);
+			} catch (ValidationException e) {
+				e.showError();
+			}
 			break;
 		default: 
 			System.out.println("ERROR. Unknown comand. Try again");

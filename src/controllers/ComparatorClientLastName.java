@@ -13,13 +13,16 @@ public class ComparatorClientLastName implements Comparator<Object> {
 				int flag = client0.getLastName().compareTo(client1.getLastName());
 				if (flag == 0)
 					return client0.getFirstName().compareTo(client1.getFirstName());
-				else 
+				else {
 					return flag;
+				}
 			}
-			else
+			else {
 				return 1;
+			}
 		} 
-		else
+		else {
 			return 1;
+		}
 	}
 }

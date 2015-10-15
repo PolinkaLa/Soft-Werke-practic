@@ -1,7 +1,10 @@
 package controllers;
 
 import static org.junit.Assert.*;
+
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.After;
 
 /**
  * @author LappoPolina
@@ -9,52 +12,51 @@ import org.junit.Test;
  */
 public class TestValidation {
 
+	Validation valid;
+	
+	@Before
+	public void init(){
+	valid = new Validation();
+	}
+	
+	@After
+	public void end() {
+		System.out.println("Test ended");
+	}
 
 	@Test
 	public void testIsValidDate() {
-		Validation valid = new Validation();
-		boolean result = true;
-		if (!(valid.isValidDate("12.12.2012") && result))
+		if (!valid.isValidDate("12.12.2012"))
 				fail("Wrong validation");
 	}
 	
 	@Test
 	public void testIsValidName() {
-		Validation valid = new Validation();
-		boolean result = true;
-		if (!(valid.isValidName("Ivanov") && result))
+		if (!valid.isValidName("Ivanov"))
 				fail("Wrong validation");
 	}
 	
 	@Test
 	public void testIsValidMark() {
-		Validation valid = new Validation();
-		boolean result = true;
-		if (!(valid.isValidMark(2) && result))
+		if (!valid.isValidMark(2))
 				fail("Wrong validation");
 	}
 	
 	@Test
 	public void testIsValidType() {
-		Validation valid = new Validation();
-		boolean result = true;
-		if (!(valid.isValidType(0) && result))
+		if (!valid.isValidType(0))
 				fail("Wrong validation");
 	}
 	
 	@Test
 	public void testIsValidColor() {
-		Validation valid = new Validation();
-		boolean result = true;
-		if (!(valid.isValidColor(4) & result))
+		if (!valid.isValidColor(4))
 				fail("Wrong validation");
 	}
 	
 	@Test
 	public void testIsValidCost() {
-		Validation valid = new Validation();
-		boolean result = true;
-		if (!(valid.isValidCost("154.34") & result))
+		if (!valid.isValidCost("154.34"))
 				fail("Wrong validation");
 	}
 }

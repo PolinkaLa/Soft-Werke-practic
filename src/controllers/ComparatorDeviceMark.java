@@ -14,13 +14,16 @@ public class ComparatorDeviceMark implements Comparator<Object> {
 				int flag = device0.getMark().compareTo(device1.getMark());																	
 				if (flag == 0)
 					return device0.getModel().compareTo(device1.getModel());
-				else 
+				else {
 					return flag;
+				}
 			}
-			else 
+			else {
 				return 1;
+			}
 		} 
-		else
+		else {
 			return 1;
+		}
 	}
 }

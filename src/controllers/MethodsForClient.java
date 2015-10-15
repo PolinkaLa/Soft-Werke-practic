@@ -3,6 +3,8 @@ package controllers;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import exception.CreateNewRecordException;
+import exception.ValidationException;
 import history.HistoryClient;
 import model.Client;
 
@@ -18,20 +20,19 @@ public class MethodsForClient {
 	 * method for create a new record about client on list of clients
 	 * @param historyClient list of clients
 	 */
-	public static void createClient(HistoryClient historyClient) {
+	public static void createClient(HistoryClient historyClient) throws CreateNewRecordException {
 		System.out.println("Enter Last Name, First Name, Middle Name and date " + "of Birthday in "
 				+ "format dd.mm.yyyy:");
-		String last = Utilit.in.next();
-		String first = Utilit.in.next();
-		String middle = Utilit.in.next();
-		String dateBirth = Utilit.in.next();
-		if (Utilit.valid.isValidName(first) & Utilit.valid.isValidName(last) & Utilit.valid.isValidName(middle)
-				& Utilit.valid.isValidDate(dateBirth)) {
-			historyClient.addClients(new Client(last, first, middle, Utilit.valid.getDate()));
+		String last = Utilit.IN.next();
+		String first = Utilit.IN.next();
+		String middle = Utilit.IN.next();
+		String dateBirth = Utilit.IN.next();
+		if (Utilit.VALID.isValidName(first) & Utilit.VALID.isValidName(last) & Utilit.VALID.isValidName(middle)
+				& Utilit.VALID.isValidDate(dateBirth)) {
+			historyClient.addClients(new Client(last, first, middle, Utilit.VALID.getDate()));
 			System.out.println("Client create successfully.");
 		} else
-			System.out.println("ERROR! Ñannot create a record from Client, verify the accuracy of "
-					+ "information entry");
+			throw new CreateNewRecordException();
 	}
 	
 	/**
@@ -83,61 +84,68 @@ public class MethodsForClient {
 	 * method for search clients by date and show finding information 
 	 * @param historyClient list of clients
 	 */
-	public static void searchClientByDate(HistoryClient historyClient) {
+	public static void searchClientByDate(HistoryClient historyClient) 
+			throws ValidationException {
 		System.out.println("Enter date:");
-		String dataForSearch = Utilit.in.next();
+		String dataForSearch = Utilit.IN.next();
 		List<Client> resultOfSearch = new ArrayList<>();
-		if (Utilit.valid.isValidDate(dataForSearch)) {
+		if (Utilit.VALID.isValidDate(dataForSearch)) {
 			for (int i = 0; i < historyClient.getUnchangedCopy().size(); i++) {
-				if (historyClient.getUnchangedCopy().get(i).getDateOfBirth().equals(Utilit.valid.getDate())) {
+				if (historyClient.getUnchangedCopy().get(i).getDateOfBirth().
+						equals(Utilit.VALID.getDate())) {
 					resultOfSearch.add(historyClient.getUnchangedCopy().get(i));
 				}
 			}
 			if (resultOfSearch.size() > 0) {
 				for (int i = 0; i < resultOfSearch.size(); i++)
-					System.out.println(resultOfSearch.get(i).toString());
+					System.out.println(resultOfSearch.get(i));
 			} else
 				System.out.println("We can't find necessary records");
 		} else
-			System.out.println("ERROR! You enter wrong date!");
+			throw new ValidationException();
 	}
 
 	/**
 	 *  method for search clients by last name and show finding information 
 	 * @param historyClient list of clients
 	 */
-	public static void searchClientByLastName(HistoryClient historyClient) {
+	public static void searchClientByLastName(HistoryClient historyClient) 
+			throws ValidationException {
 		System.out.println("Enter Last Name:");
-		String lastNameForSearch = Utilit.in.next();
+		String lastNameForSearch = Utilit.IN.next();
 		List<Client> resultOfSearch = new ArrayList<>();
-		if (Utilit.valid.isValidName(lastNameForSearch)) {
+		if (Utilit.VALID.isValidName(lastNameForSearch)) {
 			for (int i = 0; i < historyClient.getUnchangedCopy().size(); i++) {
-				if (historyClient.getUnchangedCopy().get(i).getLastName().equals(lastNameForSearch)) {
+				if (historyClient.getUnchangedCopy().get(i).getLastName().
+						equals(lastNameForSearch)) {
 					resultOfSearch.add(historyClient.getUnchangedCopy().get(i));
 				}
 			}
 			if (resultOfSearch.size() > 0) {
 				for (int i = 0; i < resultOfSearch.size(); i++)
-					System.out.println(resultOfSearch.get(i).toString());
+					System.out.println(resultOfSearch.get(i));
 			} else
 				System.out.println("We can't find necessary records");
 		} else
-			System.out.println("ERROR! You enter wrong Last Name!");
+			throw new ValidationException();
 	}
 
 	/**
 	 *  method for search clients by last and first and show finding information 
 	 * @param historyClient list of clients
 	 */
-	public static void searchClientByLastFirstName(HistoryClient historyClient) {
+	public static void searchClientByLastFirstName(HistoryClient historyClient) 
+			throws ValidationException {
 		System.out.println("Enter Last Name:");
-		String lastNameForSearch = Utilit.in.next();
+		String lastNameForSearch = Utilit.IN.next();
 		System.out.println("Enter First Name:");
-		String firstNameForSearch = Utilit.in.next();
+		String firstNameForSearch = Utilit.IN.next();
 		List<Client> resultOfSearch = new ArrayList<>();
-		if (Utilit.valid.isValidName(lastNameForSearch) & Utilit.valid.isValidName(firstNameForSearch)) {
+		if (Utilit.VALID.isValidName(lastNameForSearch) & Utilit.VALID.
+				isValidName(firstNameForSearch)) {
 			for (int i = 0; i < historyClient.getUnchangedCopy().size(); i++) {
-				if (historyClient.getUnchangedCopy().get(i).getLastName().equals(lastNameForSearch)
+				if (historyClient.getUnchangedCopy().get(i).getLastName().
+						equals(lastNameForSearch)
 						& historyClient.getUnchangedCopy().get(i).getFirstName()
 						.equals(firstNameForSearch)) {
 					resultOfSearch.add(historyClient.getUnchangedCopy().get(i));
@@ -145,24 +153,25 @@ public class MethodsForClient {
 			}
 			if (resultOfSearch.size() > 0) {
 				for (int i = 0; i < resultOfSearch.size(); i++)
-					System.out.println(resultOfSearch.get(i).toString());
+					System.out.println(resultOfSearch.get(i));
 			} else
 				System.out.println("We can't find necessary records");
 		} else
-			System.out.println("ERROR! You enter wrong Last Name or First Name!");
+			throw new ValidationException();
 	}
 
 	/**
 	 * method for search record about client by given last name and date
 	 * @param historyClient list of Client
 	 */
-	public static void searchClientByLastNameDate(HistoryClient historyClient){
+	public static void searchClientByLastNameDate(HistoryClient historyClient) 
+			throws ValidationException {
 		System.out.println("Enter date:");
-		String dataForSearch = Utilit.in.next();
+		String dataForSearch = Utilit.IN.next();
 		List<Client> resultOfSearch = new ArrayList<>();
 		System.out.println("Enter Last Name:");
-		String lastNameForSearch = Utilit.in.next();
-		if (Utilit.valid.isValidName(lastNameForSearch) & Utilit.valid.isValidDate(dataForSearch)) {
+		String lastNameForSearch = Utilit.IN.next();
+		if (Utilit.VALID.isValidName(lastNameForSearch) & Utilit.VALID.isValidDate(dataForSearch)) {
 			for (int i = 0; i < historyClient.getUnchangedCopy().size(); i++) {
 				if (historyClient.getUnchangedCopy().get(i).getLastName().equals(lastNameForSearch)
 						& historyClient.getUnchangedCopy().get(i).getDateOfBirth()
@@ -176,6 +185,6 @@ public class MethodsForClient {
 			} else
 				System.out.println("We can't find necessary records");
 		} else
-			System.out.println("ERROR! You enter wrong Last Name!");
+			throw new ValidationException();
 	}
 }

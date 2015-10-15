@@ -14,11 +14,14 @@ public class ComparatorSaleDate implements Comparator<Object> {
 				int flag = sale0.getDateOfSale().compareTo(sale1.getDateOfSale());
 				if (flag == 0)
 					return sale0.getIdSale().compareTo(sale1.getIdSale());
-				else
+				else {
 					return flag;
-			} else
-				return 1;
-		} else
+				}
+			} else {
+				return 1; 
+			}
+		} else {
 			return 1;
+		}
 	}
 }

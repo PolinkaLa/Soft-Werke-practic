@@ -3,6 +3,10 @@ package controllers;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import exception.CreateNewRecordException;
+import exception.ValidationException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import history.*;
@@ -22,34 +26,33 @@ public class MethodsForSale {
 	 * @param historyClient list of clients
 	 * @param historyDevice list of device
 	 */
-	public static void createSale(HistorySale historySale, HistoryClient historyClient, HistoryDevice historyDevice) {
-		System.out.println("Enter Date in format dd.mm.yyyy, IdClient and Numder of purchased device:");
-		String dateSale = Utilit.in.next();
-		Utilit.valid.isValidDate(dateSale);
-		int idClient = Utilit.in.nextInt();
-		int number = Utilit.in.nextInt();
+	public static void createSale(HistorySale historySale, HistoryClient historyClient, 
+			HistoryDevice historyDevice) throws CreateNewRecordException {
+		System.out.println("Enter Date in format dd.mm.yyyy, IdClient and Numder "
+				+ "of purchased device:");
+		String dateSale = Utilit.IN.next();
+		Utilit.VALID.isValidDate(dateSale);
+		int idClient = Utilit.IN.nextInt();
+		int number = Utilit.IN.nextInt();
 		int idDevice;
 		int count;
-		if (Utilit.valid.isValidClient(idClient, historyClient)) { 
+		if (Utilit.VALID.isValidClient(idClient, historyClient)) { 
 			Map<Device, Integer> checkSale = new HashMap<Device, Integer>();
 			for (int i = 0; i < number; i++) {
 				System.out.println("Enter IdDevice and Count:");
-				idDevice = Utilit.in.nextInt();
-				if (Utilit.valid.isValidDevice(idDevice, historyDevice)) { 
-					count = Utilit.in.nextInt(); 
+				idDevice = Utilit.IN.nextInt();
+				if (Utilit.VALID.isValidDevice(idDevice, historyDevice)) { 
+					count = Utilit.IN.nextInt(); 
 					checkSale.put(historyDevice.getUnchangedCopy().get(idDevice - 1), count); 
 				} else
-					System.out.println(
-							"ERROR! Ñannot create a record from Sale, verify the accuracy of "
-							+ "information entry");
+					throw new CreateNewRecordException();
 			}
 			historySale
-					.addSales(new Sale(Utilit.valid.getDate(), historyClient.getUnchangedCopy()
+					.addSales(new Sale(Utilit.VALID.getDate(), historyClient.getUnchangedCopy()
 							.get(idClient - 1), checkSale));
 			System.out.println("Sale create successfully.");
 		} else
-			System.out.println("ERROR! Ñannot create a record from Sale, verify the accuracy"
-					+ " of information entry");
+			throw new CreateNewRecordException();
 
 	}
 
@@ -59,7 +62,7 @@ public class MethodsForSale {
 	 */
 	public static void showListSale(HistorySale historySale) {
 		for (int i = 0; i < historySale.getUnchangedCopy().size(); i++)
-			System.out.println(historySale.getUnchangedCopy().get(i).toString());
+			System.out.println(historySale.getUnchangedCopy().get(i));
 	}
 	
 	/**
@@ -78,22 +81,22 @@ public class MethodsForSale {
 	 * method for search records about sale by date
 	 * @param historySale list of sales
 	 */
-	public static void searchSaleByDate(HistorySale historySale) {
+	public static void searchSaleByDate(HistorySale historySale) throws ValidationException  {
 		System.out.println("Enter date:");
-		String dateForSearch = Utilit.in.next();
+		String dateForSearch = Utilit.IN.next();
 		List<Sale> resultOfSearch = new ArrayList<>();
-		if (Utilit.valid.isValidDate(dateForSearch)) {
+		if (Utilit.VALID.isValidDate(dateForSearch)) {
 			for (int i = 0; i < historySale.getUnchangedCopy().size(); i++) {
-				if (historySale.getUnchangedCopy().get(i).getDateOfSale().equals(Utilit.valid.getDate())) {
+				if (historySale.getUnchangedCopy().get(i).getDateOfSale().equals(Utilit.VALID.getDate())) {
 					resultOfSearch.add(historySale.getUnchangedCopy().get(i));
 				}
 			}
 			if (resultOfSearch.size() > 0) {
 				for (int i = 0; i < resultOfSearch.size(); i++)
-					System.out.println(resultOfSearch.get(i).toString());
+					System.out.println(resultOfSearch.get(i));
 			} else
 				System.out.println("We can't find necessary records");
 		} else
-			System.out.println("ERROR! You enter wrong date!");
+			throw new ValidationException();
 	}	
 }

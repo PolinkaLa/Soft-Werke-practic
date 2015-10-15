@@ -32,7 +32,6 @@ public class Validation {
 			flag = true;
 		} catch (ParseException e) {
 			System.out.println("ERROR! You enter Date in the wrong format! Please try again!");
-			// e.printStackTrace();
 		}
 		return flag;
 	}
@@ -42,7 +41,7 @@ public class Validation {
 	 * @param name Last, First or Middle Name
 	 * @return true if name valid, false else
 	 */
-	public boolean isValidName(String name) {
+	public boolean isValidName(String name){
 		Pattern patternForName = Pattern.compile("^[A-Z]{1}+[a-z]+$");
 		Matcher matcherForName = patternForName.matcher(name);
 		return matcherForName.matches();

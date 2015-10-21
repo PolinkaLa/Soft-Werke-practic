@@ -18,7 +18,7 @@ public class Device {
 	private Mark mark;
 	private Type type;
 	private String model;
-	private Color color;
+	private java.awt.Color color;
 	private Date dateOfProduce;
 	private double cost;
 	private int idDevice;
@@ -39,12 +39,12 @@ public class Device {
 	 * @param dateOfProduce
 	 *            date of produce device
 	 */
-	public Device(Mark mark, Type type, String model, Color color, double cost, Date dateOfProduce) {
-		this.mark = mark;
-		this.type = type;
+	public Device(String mark, String type, String model, java.awt.Color color, /*double cost,*/ Date dateOfProduce) {
+		this.mark = Mark.valueOf(mark);
+		this.type = Type.valueOf(type);
 		this.model = model;
 		this.color = color;
-		this.cost = cost;
+		//this.cost = cost;
 		this.dateOfProduce = dateOfProduce;
 		idDevice = nextUniquelD++;
 	}
@@ -65,7 +65,7 @@ public class Device {
 		return type;
 	}
 
-	public Color getColor() {
+	public java.awt.Color getColor() {
 		return color;
 	}
 
@@ -93,7 +93,7 @@ public class Device {
 		this.type = type;
 	}
 
-	public final void setColor(Color color) {
+	public final void setColor(java.awt.Color color) {
 		this.color = color;
 	}
 

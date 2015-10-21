@@ -16,8 +16,8 @@ public class Sale {
 	private static int nextUniquelD = 1;
 	private int idSale;
 	private Date dateOfSale;
-	private Client client;
-	private Map<Device, Integer> checkOfSale = new HashMap<Device, Integer>();
+	private Integer idClient;
+	private Map<Integer, Integer> checkOfSale = new HashMap<Integer, Integer>();
 
 	/**
 	 * Constructor to initialize the new created instance
@@ -29,10 +29,10 @@ public class Sale {
 	 * @param checkOfSale
 	 *            information about device and their number
 	 */
-	public Sale(Date dateOfSale, Client client, Map<Device, Integer> checkOfSale) {
+	public Sale(Date dateOfSale, Integer idClient, Map<Integer, Integer> checkOfSale) {
 		idSale = nextUniquelD++;
 		this.dateOfSale = dateOfSale;
-		this.client = client;
+		this.idClient = idClient;
 		this.checkOfSale = checkOfSale;
 	}
 
@@ -44,11 +44,11 @@ public class Sale {
 		return (Date) dateOfSale.clone();
 	}
 
-	public Client getClient() {
-		return client;
+	public Integer getClient() {
+		return idClient;
 	}
 
-	public Map<Device, Integer> getCheckOfSle() {
+	public Map<Integer, Integer> getCheckOfSle() {
 		return checkOfSale;
 	}
 
@@ -60,11 +60,11 @@ public class Sale {
 		this.dateOfSale = dateOfSale;
 	}
 
-	public final void setClient(Client client) {
-		this.client = client;
+	public final void setClient(Integer idClient) {
+		this.idClient = idClient;
 	}
 
-	public final void setCheckOfSale(Map<Device, Integer> checkOfSale) {
+	public final void setCheckOfSale(Map<Integer, Integer> checkOfSale) {
 		this.checkOfSale = checkOfSale;
 	}
 
@@ -80,8 +80,7 @@ public class Sale {
 		final SimpleDateFormat formatOfDate = new SimpleDateFormat("dd.MM.yyyy");
 		final String Space = " ";
 		builder.append(idSale).append(Space).append(formatOfDate.format(dateOfSale)).append(Space)
-				.append(client.getLastName()).append(Space).append(client.getFirstName()).append(Space)
-				.append(client.getMiddleName()).append(Space).append(checkOfSale.keySet());
+				.append(idClient).append(Space).append(checkOfSale.keySet());
 		return builder.toString();
 	}
 }

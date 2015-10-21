@@ -7,7 +7,6 @@ import exception.CreateNewRecordException;
 import exception.ValidationException;
 import history.HistoryClient;
 import model.Client;
-
 /**
  * the class provides all necessary methods for working with records of clients
  * @author LappoPolina

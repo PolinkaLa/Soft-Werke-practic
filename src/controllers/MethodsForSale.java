@@ -10,7 +10,6 @@ import exception.ValidationException;
 import java.util.ArrayList;
 import java.util.Collections;
 import history.*;
-import model.Device;
 import model.Sale;
 
 /**
@@ -37,19 +36,18 @@ public class MethodsForSale {
 		int idDevice;
 		int count;
 		if (Utilit.VALID.isValidClient(idClient, historyClient)) { 
-			Map<Device, Integer> checkSale = new HashMap<Device, Integer>();
+			Map<Integer, Integer> checkSale = new HashMap<Integer, Integer>();
 			for (int i = 0; i < number; i++) {
 				System.out.println("Enter IdDevice and Count:");
 				idDevice = Utilit.IN.nextInt();
 				if (Utilit.VALID.isValidDevice(idDevice, historyDevice)) { 
 					count = Utilit.IN.nextInt(); 
-					checkSale.put(historyDevice.getUnchangedCopy().get(idDevice - 1), count); 
+					checkSale.put((idDevice - 1), count); 
 				} else
 					throw new CreateNewRecordException();
 			}
 			historySale
-					.addSales(new Sale(Utilit.VALID.getDate(), historyClient.getUnchangedCopy()
-							.get(idClient - 1), checkSale));
+					.addSales(new Sale(Utilit.VALID.getDate(), (idClient - 1), checkSale));
 			System.out.println("Sale create successfully.");
 		} else
 			throw new CreateNewRecordException();

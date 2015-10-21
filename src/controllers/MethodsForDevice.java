@@ -39,18 +39,16 @@ public class MethodsForDevice {
 		for (int i = 0; i < Color.values().length; i++)
 			System.out.println("	" + i + " - " + Color.values()[i]); 
 
-		int mark = Utilit.IN.nextInt();
-		int type = Utilit.IN.nextInt();
+		String mark = Utilit.IN.next();
+		String  type = Utilit.IN.next();
 		String model = Utilit.IN.next();
-		int color = Utilit.IN.nextInt();
-		String cos = Utilit.IN.next();
+		String color = Utilit.IN.next();
+		//String cos = Utilit.IN.next();
 		String date = Utilit.IN.next();
-		if (Utilit.VALID.isValidMark(mark) & Utilit.VALID.isValidType(type) & Utilit.VALID.
-				isValidColor(color) 
-				& Utilit.VALID.isValidCost(cos)
+		if (Utilit.VALID.isValidMark(mark) & Utilit.VALID.isValidType(type) 
 				& Utilit.VALID.isValidDate(date)) {
-			historyDevice.addDevices(new Device(Mark.values()[mark], Type.values()[type],
-					model, Color.values()[color], Utilit.VALID.getCost(), Utilit.VALID.getDate())); 
+			historyDevice.addDevices(new Device(mark, type,
+					model, java.awt.Color.getColor(color),/* Utilit.VALID.getCost()*/ Utilit.VALID.getDate())); 
 			System.out.println("Device create successfully.");
 		} else
 			throw new CreateNewRecordException();
@@ -169,7 +167,7 @@ public class MethodsForDevice {
 		for (int i = 0; i < Mark.values().length; i++)
 			System.out.println("	" + i + " - " + Mark.values()[i]);
 		System.out.println("Enter code of Mark:");
-		int mark = Utilit.IN.nextInt();
+		String mark = Utilit.IN.next();
 		List<Device> resultOfSearch = new ArrayList<>();
 		if (Utilit.VALID.isValidMark(mark)){
 			for (int i = 0; i < historyDevice.getUnchangedCopy().size(); i++) {
@@ -216,7 +214,7 @@ public class MethodsForDevice {
 		for (int i = 0; i < Type.values().length; i++)
 			System.out.println("	" + i + " - " + Type.values()[i]);
 		System.out.println("Enter code of Type:");
-		int type = Utilit.IN.nextInt();
+		String type = Utilit.IN.next();
 		List<Device> resultOfSearch = new ArrayList<>();
 		if (Utilit.VALID.isValidType(type)){
 			for (int i = 0; i < historyDevice.getUnchangedCopy().size(); i++) {
@@ -242,9 +240,8 @@ public class MethodsForDevice {
 		for (int i = 0; i < Color.values().length; i++)
 			System.out.println("	" + i + " - " + Color.values()[i]);
 		System.out.println("Enter code of Color:");
-		int color = Utilit.IN.nextInt();
+		String color = Utilit.IN.next();
 		List<Device> resultOfSearch = new ArrayList<>();
-		if (Utilit.VALID.isValidColor(color)){
 			for (int i = 0; i < historyDevice.getUnchangedCopy().size(); i++) {
 				if (historyDevice.getUnchangedCopy().get(i).getColor().equals(color)) {
 					resultOfSearch.add(historyDevice.getUnchangedCopy().get(i));
@@ -255,8 +252,7 @@ public class MethodsForDevice {
 					System.out.println(resultOfSearch.get(i));
 			} else
 				System.out.println("We can't find necessary records");
-		} else
-			throw new ValidationException();	
+			
 	}
 	
 	/**
@@ -291,7 +287,7 @@ public class MethodsForDevice {
 		for (int i = 0; i < Mark.values().length; i++)
 			System.out.println("	" + i + " - " + Mark.values()[i]);
 		System.out.println("Enter code of Mark:");
-		int mark = Utilit.IN.nextInt();
+		String mark = Utilit.IN.next();
 		System.out.println("Enter date:");
 		String data = Utilit.IN.next();
 		List<Device> resultOfSearch = new ArrayList<>();
@@ -322,13 +318,13 @@ public class MethodsForDevice {
 		for (int i = 0; i < Mark.values().length; i++)
 			System.out.println("	" + i + " - " + Mark.values()[i]);
 		System.out.println("Enter code of Mark:");
-		int mark = Utilit.IN.nextInt();
+		String mark = Utilit.IN.next();
 		
 		System.out.println("Code of Type:");
 		for (int i = 0; i < Type.values().length; i++)
 			System.out.println("	" + i + " - " + Type.values()[i]);
 		System.out.println("Enter code of Type:");
-		int type = Utilit.IN.nextInt();
+		String type = Utilit.IN.next();
 		List<Device> resultOfSearch = new ArrayList<>();
 		if(Utilit.VALID.isValidType(type) & Utilit.VALID.isValidMark(mark)) {
 			for (int i = 0; i < historyDevice.getUnchangedCopy().size(); i++) {
@@ -360,7 +356,6 @@ public class MethodsForDevice {
 		int color = Utilit.IN.nextInt();
 		String model = Utilit.IN.next();
 		List<Device> resultOfSearch = new ArrayList<>();
-		if(Utilit.VALID.isValidColor(color)) {
 			for (int i = 0; i < historyDevice.getUnchangedCopy().size(); i++) {
 				if (historyDevice.getUnchangedCopy().get(i).getColor().equals(color)
 						& historyDevice.getUnchangedCopy().get(i).getModel()
@@ -373,9 +368,7 @@ public class MethodsForDevice {
 					System.out.println(resultOfSearch.get(i));
 			} else
 				System.out.println("We can't find necessary records");
-			
-		} else
-			throw new ValidationException();
+	
 	}
 	
 	/**
@@ -387,7 +380,7 @@ public class MethodsForDevice {
 		for (int i = 0; i < Type.values().length; i++)
 			System.out.println("	" + i + " - " + Type.values()[i]);
 		System.out.println("Enter code of Type:");
-		int type = Utilit.IN.nextInt();
+		String type = Utilit.IN.next();
 		String cost = Utilit.IN.next();
 		List<Device> resultOfSearch = new ArrayList<>();
 		if(Utilit.VALID.isValidType(type) & Utilit.VALID.isValidCost(cost)) {

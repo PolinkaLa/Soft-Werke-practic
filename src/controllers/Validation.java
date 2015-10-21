@@ -52,11 +52,14 @@ public class Validation {
 	 * @param mark code of mark
 	 * @return true if mark valid, false else
 	 */
-	public boolean isValidMark(int mark) {
-		if ((mark >= 0) & (mark < Mark.values().length)) {
-			return true;
+	public boolean isValidMark(String mark) {
+		boolean flag = false;
+		for (int i = 0; i < Mark.values().length; i++) {
+			if ((Mark.valueOf(mark).equals(Mark.values()[i]))) {
+				flag = true;
+			}
 		}
-		return false;
+		return flag;
 	}
 
 	/**
@@ -64,11 +67,14 @@ public class Validation {
 	 * @param type code of type
 	 * @return true if type valid, false else
 	 */
-	public boolean isValidType(int type) {
-		if ((type >= 0) & (type < Type.values().length)) {
-			return true;
+	public boolean isValidType(String type) {
+		boolean flag = false;
+		for (int i = 0; i < Type.values().length; i++) {
+			if ((Type.valueOf(type).equals(Type.values()[i]))) {
+				flag = true;
+			}
 		}
-		return false;
+		return flag;
 	}
 
 	/**
@@ -76,12 +82,12 @@ public class Validation {
 	 * @param color code of color
 	 * @return true if color valid, false else
 	 */
-	public boolean isValidColor(int color) {
-		if ((color >= 0) & (color < Color.values().length)) {
-			return true;
-		}
-		return false;
-	}
+	//public boolean isValidColor(int color) {
+	//	if ((color >= 0) & (color < Color.values().length)) {
+	//		return true;
+	//	}
+	//	return false;
+	//}
 
 	/**
 	 * method for validate cost

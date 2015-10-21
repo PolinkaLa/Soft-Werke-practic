@@ -1,5 +1,5 @@
 package model;
 
 public enum Mark {
-	Apple, Sony, Samsung, Nokia, HTC
+	ACER, APPLE, ASUS, DELL, HP, LENOVO, MICROSOFT, SAMSUNG, SONY
 }

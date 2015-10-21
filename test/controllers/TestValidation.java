@@ -38,19 +38,13 @@ public class TestValidation {
 	
 	@Test
 	public void testIsValidMark() {
-		if (!valid.isValidMark(2))
+		if (!valid.isValidMark("ASUS"))
 				fail("Wrong validation");
 	}
 	
 	@Test
 	public void testIsValidType() {
-		if (!valid.isValidType(0))
-				fail("Wrong validation");
-	}
-	
-	@Test
-	public void testIsValidColor() {
-		if (!valid.isValidColor(4))
+		if (!valid.isValidType("TABLET"))
 				fail("Wrong validation");
 	}
 	

@@ -25,8 +25,8 @@ private List<Sale> sales = new ArrayList<>();
 	public final void addSales(Sale sale) {
 		sales.add(sale);
 	}
-	public Map<Device, Integer> getDevices(int idClient) {
-		Map<Device, Integer> deviceCopy = new HashMap<Device, Integer>();
+	public Map<Integer, Integer> getDevices(int idClient) {
+		Map<Integer, Integer> deviceCopy = new HashMap<Integer, Integer>();
 		deviceCopy.putAll(sales.get(idClient).getCheckOfSle());
 		return deviceCopy;
 	}

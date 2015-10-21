@@ -11,7 +11,7 @@ public class ComparatorDeviceColor implements Comparator<Object> {
 			Device device1 = (Device) arg1;
 			
 			if ((device0.getColor() != null) & (device1.getColor() != null)) {
-				int flag = device0.getColor().compareTo(device1.getColor());																	
+				int flag = device0.getColor().toString().compareTo(device1.getColor().toString());																	
 				if (flag == 0)
 					return device0.getMark().compareTo(device1.getMark());
 				else {

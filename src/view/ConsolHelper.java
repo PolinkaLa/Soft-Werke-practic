@@ -1,17 +1,19 @@
 package view;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import controllers.MethodsForClient;
 import controllers.MethodsForDevice;
 import controllers.MethodsForSale;
 import controllers.Utilit;
-import exception.CreateNewRecordException;
 import exception.ValidationException;
 import history.*;
 
 public class ConsolHelper {
-	private static HistoryClient historyOfClient = new HistoryClient();
-	private static HistoryDevice historyOfDevice = new HistoryDevice();
-	private static HistorySale historyOfSale = new HistorySale();
+	static HistoryClient historyOfClient = new HistoryClient();
+	static HistoryDevice historyOfDevice = new HistoryDevice();
+	static HistorySale historyOfSale = new HistorySale();
 	
 	/**
 	 * display a basic command list
@@ -44,25 +46,45 @@ public class ConsolHelper {
 			switch (Utilit.IN.next()) {
 
 			case "createClient": 
-				try {
-					MethodsForClient.createClient(historyOfClient);
-				} catch (CreateNewRecordException e) {
-					e.showError();
-				}
+					System.out.println("Enter Last Name, First Name, Middle Name and date " + "of Birthday in "
+						+ "format dd.mm.yyyy:");
+				String last = Utilit.IN.next();
+				String first = Utilit.IN.next();
+				String middle = Utilit.IN.next();
+				String dateBirth = Utilit.IN.next();
+				Utilit.VALID.isValidDate(dateBirth);
+				DeviceStore.getDeviceStore().addClient(last, first, middle, Utilit.VALID.getDate());
 				break;
 			case "createDevice": 
-				try {
-					MethodsForDevice.createDevice(historyOfDevice);
-				} catch (CreateNewRecordException e) {
-					e.showError();
-				}
+				System.out.println("Enter Code of Mark, Code of Type, Model, Code of Color,"
+						+ " and Date of Produce in format dd.mm.yyyy:");
+				String mark = Utilit.IN.next();
+				String type = Utilit.IN.next();
+				String model = Utilit.IN.next();
+				String color = Utilit.IN.next();
+				String date = Utilit.IN.next();
+				Utilit.VALID.isValidDate(date);
+				DeviceStore.getDeviceStore().addDevice(type, mark, model, java.awt.Color.getColor(color), Utilit.VALID.getDate());
 				break;
 			case "createSale": 
-				try {
-					MethodsForSale.createSale(historyOfSale, historyOfClient, historyOfDevice);
-				} catch (CreateNewRecordException e) {
-					e.showError();
+				System.out.println("Enter Date in format dd.mm.yyyy, IdClient and Numder "
+						+ "of purchased device:");
+				String dateSale = Utilit.IN.next();
+				Utilit.VALID.isValidDate(dateSale);
+				int idClient = Utilit.IN.nextInt();
+				int number = Utilit.IN.nextInt();
+				int idDevice;
+				int count;
+				Map<Integer, Integer> checkSale = new HashMap<Integer, Integer>();
+				for (int i = 0; i < number; i++) {
+					System.out.println("Enter IdDevice and Count:");
+					idDevice = Utilit.IN.nextInt();
+					if (Utilit.VALID.isValidDevice(idDevice, historyOfDevice)) { 
+						count = Utilit.IN.nextInt(); 
+						checkSale.put((idDevice - 1), count); 
+					}
 				}
+				DeviceStore.getDeviceStore().addSale(Utilit.VALID.getDate(), idClient, checkSale);
 				break;
 			case "sortListClient": 
 				comandSortClient();
@@ -71,7 +93,7 @@ public class ConsolHelper {
 				comandSortDevice();
 				break;
 			case "sortListSale": 
-				MethodsForSale.sortByDateSaleList(historyOfSale);
+				DeviceStore.getDeviceStore().sortSalesByDate();
 				break;
 			case "searchOnListClient": 
 				comandSearchClient();
@@ -121,7 +143,7 @@ public class ConsolHelper {
 			MethodsForClient.sortByLastNameClient(historyOfClient);
 			break;
 		case "FirstName":
-			MethodsForClient.sortByFirtsNameClientList(historyOfClient);
+			DeviceStore.getDeviceStore().sortClientsByName();;
 			break;
 		default: 
 			System.out.println("ERROR. Unknown comand. Try again");
@@ -143,7 +165,7 @@ public class ConsolHelper {
 			MethodsForDevice.sortByTypeDeviceList(historyOfDevice);
 			break;
 		case "Mark":
-			MethodsForDevice.sortByMarkDeviceList(historyOfDevice);
+			DeviceStore.getDeviceStore().sortDevicesByModel();;
 			break;
 		case "Model":
 			MethodsForDevice.sortByModelDeviceList(historyOfDevice);
@@ -174,12 +196,10 @@ public class ConsolHelper {
 				e.showError();
 			}
 			break;
-		case "LastName":
-			try {
-				MethodsForClient.searchClientByLastName(historyOfClient);
-			} catch (ValidationException e) {
-				e.showError();
-			}
+		case "FirstName":
+			System.out.println("Enter Name:");
+			String lastNameForSearch = Utilit.IN.next();
+			DeviceStore.getDeviceStore().searchClientsByName(lastNameForSearch);
 			break;
 		case "LastFirstName":
 			try {
@@ -210,11 +230,10 @@ public class ConsolHelper {
 		
 		switch (Utilit.IN.next()) {
 		case "Date":
-			try {
-				MethodsForDevice.searchDeviceByDate(historyOfDevice);
-			} catch (ValidationException e) {
-				e.showError();
-			}
+			System.out.println("Enter date:");
+			String dataForSearch = Utilit.IN.next();
+			Utilit.VALID.isValidDate(dataForSearch);
+			DeviceStore.getDeviceStore().searchDevicesByIssueDate(Utilit.VALID.getDate());
 			break;
 		case "Mark":
 			try {

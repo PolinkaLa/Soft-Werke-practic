@@ -27,14 +27,12 @@ import model.*;
 public class DeviceStore implements IDeviceStore {
 
 	public static void main(String[] args) {
-		
-		//public static IDeviceStore getDeviceStore() {
-
-		
 		ConsolHelper.helpForUser();
 		ConsolHelper.comand();
 	}
 
+	static DeviceStore deviceStore;
+	
 	@Override
 	public void addClient(String lastName, String firstName, String middleName, Date birthDate) {
 		Client client = new Client(lastName, firstName, middleName, birthDate);
@@ -51,81 +49,60 @@ public class DeviceStore implements IDeviceStore {
 
 	@Override
 	public void addSale(Date dateOfSale, Integer clientId, Map<Integer, Integer> deviceIdAndQuantity) {
-		Sale sale = new Sale(dateOfSale, clientId, deviceIdAndQuantity);
-		ConsolHelper.historyOfSale.addSales(sale);
-		
+		if (Utilit.VALID.isValidClient(clientId, ConsolHelper.historyOfClient)) {
+			ConsolHelper.historyOfSale.addSales(new Sale(dateOfSale, clientId, deviceIdAndQuantity));
+		}		
 	}
 
 	@Override
 	public void searchClientsByName(String name){
-		//System.out.println("Enter Last Name:");
-		//String lastNameForSearch = Utilit.IN.next();
 		List<Client> resultOfSearch = new ArrayList<>();
+		List<Client> listForSearch = ConsolHelper.historyOfClient.getChangedCopy();
 		if (Utilit.VALID.isValidName(name)) {
-			for (int i = 0; i < ConsolHelper.historyOfClient.getUnchangedCopy().size(); i++) {
-				if (ConsolHelper.historyOfClient.getUnchangedCopy().get(i).getFirstName().
-						equals(name)) {
-					resultOfSearch.add(ConsolHelper.historyOfClient.getUnchangedCopy().get(i));
-				}
+			for (Client client : listForSearch)
+			{
+				if (client.getFirstName().equals(name))
+					resultOfSearch.add(client);
 			}
-			if (resultOfSearch.size() > 0) {
-				for (int i = 0; i < resultOfSearch.size(); i++)
-					System.out.println(resultOfSearch.get(i));
-			} else
-				System.out.println("We can't find necessary records");
-		} else
-			System.out.println("Invalid input");;		
+		}		
 	}
 
 	@Override
 	public void searchDevicesByIssueDate(Date issueDate) {
-		//System.out.println("Enter date:");
-		//String dataForSearch = Utilit.IN.next();
 		List<Device> resultOfSearch = new ArrayList<>();
-		
-			for (int i = 0; i < ConsolHelper.historyOfDevice.getUnchangedCopy().size(); i++) {
-				if (ConsolHelper.historyOfDevice.getUnchangedCopy().get(i).getDateOfProduce().equals(issueDate)) {
-					resultOfSearch.add(ConsolHelper.historyOfDevice.getUnchangedCopy().get(i));
-				}
-			}
-			if (resultOfSearch.size() > 0) {
-				for (int i = 0; i < resultOfSearch.size(); i++)
-					System.out.println(resultOfSearch.get(i));
-			} else
-				System.out.println("We can't find necessary records");		
+		List<Device> listForSearch = ConsolHelper.historyOfDevice.getChangedCopy();
+		for (Device device : listForSearch)
+		{
+			if (device.getDateOfProduce().equals(issueDate))
+				resultOfSearch.add(device);
+		}
 	}
 
 	@Override
 	public void sortClientsByName() {
 		ComparatorClientDate comparatorFirstName = new ComparatorClientDate();
 		HistoryClient historyClientCopy = new HistoryClient();
-		historyClientCopy.setClients(ConsolHelper.historyOfClient.getUnchangedCopy());
-		Collections.sort(historyClientCopy.getChangedCopy(), comparatorFirstName);
-		MethodsForClient.showListClient(historyClientCopy);
-		
+		historyClientCopy.setClients(ConsolHelper.historyOfClient.getChangedCopy());
+		Collections.sort(historyClientCopy.getChangedCopy(), comparatorFirstName);		
 	}
 
 	@Override
 	public void sortDevicesByModel() {
 		ComparatorDeviceMark comparatorDeviceMark = new ComparatorDeviceMark();
 		HistoryDevice historyDeviceCopy = new HistoryDevice();
-		historyDeviceCopy.setDevices(ConsolHelper.historyOfDevice.getUnchangedCopy());
-		Collections.sort(historyDeviceCopy.getChangedCopy(), comparatorDeviceMark);
-		MethodsForDevice.showListDevice(historyDeviceCopy);
-		
+		historyDeviceCopy.setDevices(ConsolHelper.historyOfDevice.getChangedCopy());
+		Collections.sort(historyDeviceCopy.getChangedCopy(), comparatorDeviceMark);	
 	}
 
 	@Override
 	public void sortSalesByDate() {
 		ComparatorSaleDate comparatorSaleDate = new ComparatorSaleDate();
 		HistorySale historySaleCopy = new HistorySale();
-		historySaleCopy.setSale(ConsolHelper.historyOfSale.getUnchangedCopy());
+		historySaleCopy.setSale(ConsolHelper.historyOfSale.getChangedCopy());
 		Collections.sort(historySaleCopy.getChangedCopy(), comparatorSaleDate);
-		MethodsForSale.showListSale(historySaleCopy);
-		
 	}
 	
 	public static IDeviceStore getDeviceStore() {
-		return DeviceStore.getDeviceStore();
+		return deviceStore;
 	}
 }

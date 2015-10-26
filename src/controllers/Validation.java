@@ -109,7 +109,7 @@ public class Validation {
 	 * @param historyClient list of clients
 	 * @return true if historyClient contain client with idClient , false else
 	 */
-	public boolean isValidClient(int idClient, HistoryClient historyClient) {
+	public boolean isValidClient(Integer idClient, HistoryClient historyClient) {
 		if (historyClient.getUnchangedCopy().size() > idClient) {
 			return true;
 		}
